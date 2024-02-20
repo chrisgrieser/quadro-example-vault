@@ -15,7 +15,7 @@ information.
 - A few simple Codings and Extractions for demonstration purposes.
 
 ## Installation & Usage
-1. Download this repository.
+1. [Download this repository](https://github.com/chrisgrieser/quadro-example-vault/releases/latest/download/quadro-example-vault.zip).
 2. Open the directory `quadro-example-vault` as an Obsidian vault. ([If you are
    new to Obsidian, see the Obsidian Documentation on how to do
    that.](https://help.obsidian.md/Getting+started/Create+a+vault#Open+existing+folder))
