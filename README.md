@@ -11,10 +11,11 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- Quadro, itself (configured to be auto-updated via the BRAT plugin)
 	- Dataview: The Data Analysis Plugin
 	- Dynamic Highlights: Highlight specific words throughout the vault. Useful to highlight key words in the data. 
+	- Advanced URI: A plugin needed for the [MarkDownload Browser Extension](https://chromewebstore.google.com/detail/markdownload-markdown-web/pcmpcfapbekmbjjkdalcgopdkipoggdi)
 - Example Data for demonstration purposes, all stored in the folder `Data`
 	- Two mock interviews with app developers for iOS and Android. (The words "iOS" and "Android" are highlighted via the *Dynamic Highlights* plugin.)
-		- [[Mock Interview A – iOS developer]]
-		- [[Mock Interview B – Android developer]]
+		- [[Mock Interview A (iOS developer)]]
+		- [[Mock Interview B (Android developer)]]
 	- A few articles downloaded with the [MarkDownload Browser Extension](https://chromewebstore.google.com/detail/markdownload-markdown-web/pcmpcfapbekmbjjkdalcgopdkipoggdi)
 - Example Codings and Extractions, in the folders `Codes` and `Extractions` respectively.
 
