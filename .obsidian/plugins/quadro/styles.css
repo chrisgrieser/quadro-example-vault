@@ -1,0 +1,132 @@
+.variable-safety-for-obsidian-css {
+	--text-faint: "";
+	--background-secondary-alt: "";
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* NOTE
+Overwriting of (some) core styling is done on purpose. As noted in the README,
+Quadro is intended to be used in specialized vaults, solely dedicated to QDA.
+
+I assume that running multiple document.querySelector on every file-open and
+adding classes to quite a few elements would have somewhat of a performance
+impact, which I wanted to avoid if Quadro is to be run in dedicated vaults only
+anyway.
+*/
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* BLOCK IDS */
+
+/* Make them less visible */
+.cm-line .cm-blockid {
+	opacity: 0.3;
+}
+
+/* Hide Block Id on non-active line */
+.cm-line:not(.cm-active) .cm-blockid {
+	display: none;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* EMBEDDED LINKS */
+
+.markdown-embed.internal-embed.inline-embed {
+	--between-embeds-spacing: 2rem;
+	border: none;
+	padding: 0;
+	padding-bottom: var(--between-embeds-spacing);
+}
+
+/* show location of embedded block links */
+.markdown-embed.internal-embed.inline-embed::after {
+	/* destination is saved in `alt` attribute */
+	content: attr(alt);
+	color: var(--text-faint);
+	padding-left: 1.75rem;
+	padding-top: 4px;
+}
+
+/* move link down to destination text */
+.markdown-embed.internal-embed.inline-embed .markdown-embed-link {
+	top: unset;
+	bottom: var(--between-embeds-spacing);
+	left: 0;
+}
+
+/* remove wasted space */
+.markdown-embed.internal-embed.inline-embed .markdown-embed-title {
+	display: none;
+}
+
+.markdown-embed.internal-embed.inline-embed p {
+	margin-bottom: 0;
+}
+
+/* spacing added by some themes (e.g. Prism) */
+body .internal-embed .markdown-embed-content {
+	padding: 0;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* DATAVIEW */
+
+/* full line width for dataview */
+body:not(.is-mobile) :is(.markdown-source-view, .markdown-preview-view):has(.dataview.table-view-table) {
+	--file-line-width: 100%;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* FILE EXPLORER */
+
+/* bold to all the folders with special function for Quadro */
+.nav-folder-title:is([data-path="Codes"], [data-path="Extractions"], [data-path="Data"]) .nav-folder-title-content {
+	font-weight: 800;
+}
+
+/* icons for Code Files and Extraction Files */
+:is(.nav-file-title, .nav-folder-title):is([data-path^="Codes/"], [data-path^="Extractions/"])::before {
+	padding-right: 3px;
+}
+
+.nav-file-title[data-path^="Codes/"]::before {
+	content: "○";
+}
+
+.nav-file-title[data-path^="Extractions/"]:not([data-path$="/Template.md"])::before {
+	content: "🞏";
+}
+
+.nav-folder-title[data-path^="Extractions/"]::before,
+.nav-file-title[data-path^="Extractions/"][data-path$="/Template.md"]::before {
+	content: "⯀";
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* QUADRO MODALS */
+
+.quadro input {
+	min-width: 20rem;
+	width: 100%;
+}
+
+.quadro-bulk-code-creation .setting-item-info {
+	display: none;
+}
+
+.quadro textarea {
+	width: 100%;
+	min-height: 10rem;
+}
+
+.quadro button[disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* QUADRO RIBBON BUTTONS */
+
+.side-dock-ribbon-action[aria-label^="Quadro: "] {
+	background: var(--background-secondary-alt);
+}

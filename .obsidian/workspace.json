@@ -1,0 +1,112 @@
+{
+  "main": {
+    "id": "74c62af88729a69d",
+    "type": "split",
+    "children": [
+      {
+        "id": "c1a7f2fd777c1dee",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3c4c2c26b6f7fdc9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7ca66be0d4883233",
+    "type": "split",
+    "children": [
+      {
+        "id": "ce0179fb1774afae",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "581a0637a398027b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1f1074078a7d8ac8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "[\"aliases\"]",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c1fae11eb9920578",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 224.500732421875
+  },
+  "right": {
+    "id": "d7ce7723e93d68d0",
+    "type": "split",
+    "children": [],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": true,
+      "command-palette:Open command palette": true,
+      "obsidian42-brat:BRAT": true,
+      "quadro:Quadro: Assign code to paragraph": false,
+      "quadro:Quadro: Rename code": false,
+      "quadro:Quadro: Delete code from paragraph": false,
+      "quadro:Quadro: Delete code file and all references to it": false,
+      "quadro:Quadro: Merge codes": false,
+      "quadro:Quadro: Bulk create new code files": false,
+      "quadro:Quadro: Extract from paragraph": false,
+      "quadro:Quadro: Create new extraction type": false,
+      "quadro:Quadro: Aggregate extractions": false,
+      "graph:Open graph view": false
+    }
+  },
+  "active": "3c4c2c26b6f7fdc9",
+  "lastOpenFiles": [
+    "Analysis/Code- Co-occurence Example.md",
+    "README.md",
+    "Analysis",
+    "Data/Mock Interview B – Android developer.md",
+    "Data/Mock Interview A – iOS developer.md",
+    "untitled"
+  ]
+}

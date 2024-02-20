@@ -1,0 +1,13 @@
+{
+  "foldHeading": false,
+  "foldIndent": false,
+  "spellcheck": false,
+  "autoPairBrackets": false,
+  "autoPairMarkdown": false,
+  "trashOption": "local",
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": false,
+  "attachmentFolderPath": "./attachments",
+  "showLineNumber": false,
+  "showInlineTitle": false
+}
