@@ -1,9 +1,7 @@
 [
   "file-explorer",
   "global-search",
-  "switcher",
   "graph",
-  "properties",
   "command-palette",
   "file-recovery"
 ]

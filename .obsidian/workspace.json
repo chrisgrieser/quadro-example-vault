@@ -4,17 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "c1a7f2fd777c1dee",
+        "id": "0c658a9a90468cfb",
         "type": "tabs",
         "children": [
           {
-            "id": "3c4c2c26b6f7fdc9",
+            "id": "7ceb11b476d204be",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data/Mock Interview A (iOS developer).md",
+                "file": "README.md",
                 "mode": "source",
+                "backlinks": false,
                 "source": false
               }
             }
@@ -48,24 +49,12 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "[\"aliases\"]",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
-            }
-          },
-          {
-            "id": "c1fae11eb9920578",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
               }
             }
           }
@@ -85,7 +74,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": true,
       "command-palette:Open command palette": true,
       "obsidian42-brat:BRAT": true,
       "quadro:Quadro: Assign code to paragraph": false,
@@ -100,20 +88,33 @@
       "graph:Open graph view": false
     }
   },
-  "active": "3c4c2c26b6f7fdc9",
+  "active": "7ceb11b476d204be",
   "lastOpenFiles": [
+    "Analysis/Code Co-occurence Example.md",
+    "Data/Mock Interview A (iOS developer).md",
+    "Data/Verge Article B.md",
+    "Data/Verge Article A.md",
+    "Data/Verge Article C.md",
+    "Data/Mock Interview B (Android developer).md",
+    "Extractions/compatibility challenges (Aggregation).md",
+    "README.md",
+    "Codes/app store.md",
+    "Codes/Compatibility.md",
+    "Codes/WebApps.md",
+    "Extractions/compatibility challenges/4.md",
+    "Extractions/app store problem (Aggregation).md",
+    "Extractions/compatibility challenges/Template.md",
+    "Extractions/compatibility challenges/1.md",
+    "Extractions/compatibility challenges/2.md",
+    "Extractions/compatibility challenges/3.md",
+    "Extractions/app store problem/Template.md",
+    "Extractions/app store problem",
+    "Extractions/compatibility challenges",
     "recommended-citation/CITATION.cff",
     "recommended-citation/CITATION.bib",
     "recommended-citation",
-    "Data/Mock Interview B (Android developer).md",
-    "Data/Mock Interview A (iOS developer).md",
-    "Data/Verge Article A.md",
-    "Data/Verge Article C.md",
-    "Data/Verge Article B.md",
-    "README.md",
     "Data/Apple unbanned Epic so it can make an iOS games store in the EU.md",
     "Data/Yep, Apple’s breaking iPhone web apps in the EU.md",
-    "Analysis/Code- Co-occurence Example.md",
     "Analysis",
     "untitled"
   ]

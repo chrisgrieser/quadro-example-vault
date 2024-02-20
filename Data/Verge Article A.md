@@ -21,7 +21,7 @@ Epic is one step closer to opening its iOS games store in the European Union. As
 
 In 2020, Apple pulled Epic’s developer account after the company began using its own in-app payment option [in the iOS version of *Fortnite*](https://www.theverge.com/2020/8/13/21366438/apple-fortnite-ios-app-store-violations-epic-payments), sparking [a lengthy legal battle](https://www.theverge.com/2021/9/12/22667694/epic-v-apple-trial-fortnite-judge-yvonne-gonzalez-rogers-final-ruling-injunction-breakdown) over whether Apple’s behavior was anticompetitive. But even after the trial ended, and neither company emerged a clear winner, [Apple still refused](https://www.theverge.com/2021/9/22/22687968/fortnite-ios-epic-apple-appeal-verdict-antitrust) to reinstate Epic’s developer account.
 
-Things are changing now that the EU has implemented the Digital Markets Act (DMA). The new rules force Apple to open up its iOS ecosystem to third-party app stores in the EU. Epic Games says it plans to open its iOS storefront in the EU this year.
+Things are changing now that the EU has implemented the Digital Markets Act (DMA). ==The new rules force Apple to open up its iOS ecosystem to third-party app stores in the EU.== Epic Games says it plans to open its iOS storefront in the EU this year. [[app store]] ^id-958998
 
 “I’ll be the first to acknowledge a good faith move by Apple amidst our cataclysmic antitrust battle, in granting Epic Games Sweden AB a developer account for operating Epic Games Store and Fortnite in Europe under the Digital Markets Act,” Sweeney says in a post on X.
 
