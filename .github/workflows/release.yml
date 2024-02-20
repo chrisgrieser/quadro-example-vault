@@ -12,8 +12,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Build
-        id: build
+      - uses: actions/checkout@v2
+      - name: Create Zip File
+        id: create-zip
         run: |
           mkdir "${{ env.REPO_NAME }}"
           cp -r "Data" "Codes" "Extractions" "README.md" "Analysis" "${{ env.REPO_NAME }}"
