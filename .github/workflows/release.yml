@@ -1,0 +1,44 @@
+name: Create Release from Example Vault
+
+on:
+  push:
+    tags: ["*"]
+
+env:
+  REPO_NAME: ${{ github.event.repository.name }}
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Build
+        id: build
+        run: |
+          mkdir "${{ env.REPO_NAME }}"
+          cp -r "Data" "Codes" "Extractions" "README.md" "Analysis" "${{ env.REPO_NAME }}"
+          zip -r "${{ env.REPO_NAME }}.zip" "${{ env.REPO_NAME }}"
+          echo "::set-output name=tag_name::$(git tag --sort version:refname | tail -n 1)"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ github.ref }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload zip file
+        id: upload-zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./${{ env.REPO_NAME }}.zip
+          asset_name: ${{ env.REPO_NAME }}-${{ steps.build.outputs.tag_name }}.zip
+          asset_content_type: application/zip
