@@ -1,0 +1,3 @@
+# DOCS https://github.com/igorshubovych/markdownlint-cli#ignoring-files
+# disable markdownlint, since we use the Obsidian linter inside the vault
+*.md

@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "0c658a9a90468cfb",
+        "id": "0c962f2974802a33",
         "type": "tabs",
         "children": [
           {
-            "id": "7ceb11b476d204be",
+            "id": "261f00cd984bbfd2",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -74,7 +74,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "command-palette:Open command palette": true,
       "obsidian42-brat:BRAT": true,
       "quadro:Quadro: Assign code to paragraph": false,
       "quadro:Quadro: Rename code": false,
@@ -85,29 +84,33 @@
       "quadro:Quadro: Extract from paragraph": false,
       "quadro:Quadro: Create new extraction type": false,
       "quadro:Quadro: Aggregate extractions": false,
-      "graph:Open graph view": false
+      "graph:Open graph view": false,
+      "command-palette:Open command palette": false,
+      "switcher:Open quick switcher": false
     }
   },
-  "active": "7ceb11b476d204be",
+  "active": "261f00cd984bbfd2",
   "lastOpenFiles": [
-    "Analysis/Code Co-occurence Example.md",
-    "Data/Mock Interview A (iOS developer).md",
-    "Data/Verge Article B.md",
-    "Data/Verge Article A.md",
-    "Data/Verge Article C.md",
-    "Data/Mock Interview B (Android developer).md",
-    "Extractions/compatibility challenges (Aggregation).md",
-    "README.md",
-    "Codes/app store.md",
-    "Codes/Compatibility.md",
     "Codes/WebApps.md",
+    "README.md",
+    "Analysis/Code Co-occurrence Example.md",
+    "Analysis/compatibility challenges (Aggregation).md",
     "Extractions/compatibility challenges/4.md",
-    "Extractions/app store problem (Aggregation).md",
-    "Extractions/compatibility challenges/Template.md",
     "Extractions/compatibility challenges/1.md",
     "Extractions/compatibility challenges/2.md",
-    "Extractions/compatibility challenges/3.md",
+    "Data/Verge Article C.md",
+    "Data/Verge Article A.md",
+    "Codes/app store.md",
+    "Data/Verge Article B.md",
+    "Extractions/app store problem/1.md",
     "Extractions/app store problem/Template.md",
+    "Analysis/Code Co-occurence Example.md",
+    "Data/Mock Interview A (iOS developer).md",
+    "Data/Mock Interview B (Android developer).md",
+    "Codes/Compatibility.md",
+    "Extractions/app store problem (Aggregation).md",
+    "Extractions/compatibility challenges/Template.md",
+    "Extractions/compatibility challenges/3.md",
     "Extractions/app store problem",
     "Extractions/compatibility challenges",
     "recommended-citation/CITATION.cff",

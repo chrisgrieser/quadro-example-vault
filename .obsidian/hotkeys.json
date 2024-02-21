@@ -1,0 +1,26 @@
+{
+  "obsidian-another-quick-switcher:search-command_search-code-files": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "C"
+    }
+  ],
+  "obsidian-another-quick-switcher:search-command_search-data-files": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "D"
+    }
+  ],
+  "obsidian-another-quick-switcher:search-command_search-extraction-files": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "E"
+    }
+  ]
+}

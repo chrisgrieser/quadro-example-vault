@@ -1,9 +1,13 @@
 {
   "pinned": [
+    "obsidian-another-quick-switcher:search-command_search-code-files",
+    "obsidian-another-quick-switcher:search-command_search-data-files",
+    "obsidian-another-quick-switcher:search-command_search-extraction-files",
+    "file-recovery:open",
     "quadro:assign-code",
-    "quadro:rename-code",
     "quadro:unassign-code",
     "quadro:delete-code-everywhere",
+    "quadro:rename-code",
     "quadro:merge-codes",
     "quadro:bulk-create-new-code-files",
     "quadro:extract-from-paragraph",

@@ -7,7 +7,7 @@ keywords:
   - App Store
 abstract: Fortnite is coming back to iOS soon.
 url: https://www.theverge.com/2024/2/16/24074873/epic-apple-ios-developer-account-eu-games-store-fortnite
-downloadDate: 2024-02-20
+download date: 2024-02-20
 ---
 ## Epic Games is planning to launch a digital storefront — and Fortnite — on iOS this year.
 
@@ -15,7 +15,7 @@ By [Emma Roth](https://www.theverge.com/authors/emma-roth), a news writer who co
 
 Feb 16, 2024, 5:29 PM GMT+1
 
-Epic is one step closer to opening its iOS games store in the European Union. As [part of its 2023 year in review](https://store.epicgames.com/en-US/news/epic-games-store-2023-year-in-review), Epic Games announced Apple has reinstated its developer account, which means it will finally be able to let users download *Fortnite* on iPhones again.
+Epic is one step closer to opening its iOS games store in the European Union. As [part of its 2023 year in review](https://store.epicgames.com/en-US/news/epic-games-store-2023-year-in-review), Epic Games announced Apple has reinstated its developer account, which means it will finally be able to let users download *Fortnite* on iPhones again. 
 
 [Epic first announced](https://www.theverge.com/2024/1/25/24050800/epic-games-store-fortnite-apple-ios-launch-eu-dma) plans to bring its game store and *Fortnite* to iOS in January, but it wasn’t clear whether Apple would grant it a developer account.
 

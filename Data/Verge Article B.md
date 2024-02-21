@@ -6,7 +6,7 @@ keywords:
   - EU
 abstract: Apple says web apps from third-party browsers are a security risk.
 url: https://www.theverge.com/2024/2/15/24074182/apple-drops-support-iphone-web-apps-eu-dma
-downloadDate: 2024-02-20
+download date: 2024-02-20
 ---
 ## Apple is blaming the change on the ‘enormous’ changes it’s been forced to make under the EU’s Digital Markets Act.
 
