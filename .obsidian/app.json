@@ -6,8 +6,9 @@
   "autoPairMarkdown": false,
   "trashOption": "local",
   "alwaysUpdateLinks": true,
-  "showUnsupportedFiles": false,
+  "showUnsupportedFiles": true,
   "attachmentFolderPath": "./attachments",
   "showLineNumber": false,
-  "showInlineTitle": false
+  "showInlineTitle": false,
+  "newFileLocation": "current"
 }
