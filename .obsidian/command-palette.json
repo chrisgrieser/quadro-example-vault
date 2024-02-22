@@ -12,6 +12,7 @@
     "quadro:bulk-create-new-code-files",
     "quadro:extract-from-paragraph",
     "quadro:create-new-extraction-type",
-    "quadro:aggregate-extractions"
+    "quadro:aggregate-extractions",
+    "quadro:export-all-extractions-as-csv"
   ]
 }
