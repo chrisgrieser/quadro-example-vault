@@ -1,5 +1,8 @@
 {
   "accentColor": "#5ca6f5",
   "baseFontSize": 16,
-  "showViewHeader": true
+  "showViewHeader": true,
+  "enabledCssSnippets": [
+    "minor-adjustments"
+  ]
 }

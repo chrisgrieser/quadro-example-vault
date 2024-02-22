@@ -1,4 +1,4 @@
-.PHONY: release
+.PHONY: release update-plugin
 
 # As this is only an example vault, we do not need to be concerned with stuff
 # like sem-ver, simple incrementing is fine here. `pull --tags` in case of a
@@ -9,4 +9,9 @@ release:
 	next_tag=$$((last_tag + 1)) && \
 	git tag "v$$next_tag" && \
 	git push origin --tags
+
+# updates plugins, and by starting up also updates quadro via BRAT
+update-plugin:
+	vault_name=$$(basename "$$PWD")
+	open "obsidian://advanced-uri?vault=$$vault_name&updateplugins=true"
 

@@ -1,0 +1,10 @@
+/* hide BRAT icon, since irritating for new users, and a starter vault does not
+* remember the setting when hiding it. */
+.side-dock-ribbon-action[aria-label="BRAT"] {
+	display: none;
+}
+
+/* FIX bug where the save button is not properly clickable */
+body .dynamic-highlights-settings .query-wrapper input {
+	width: 100%;
+}

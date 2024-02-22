@@ -7,5 +7,4 @@ TABLE
 	extraction-source
 FROM "Extractions/compatibility challenges"
 WHERE file.name != "Template"
-SORT extraction-date ASC
 ```
