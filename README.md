@@ -4,10 +4,13 @@ This is an example vault for [Quadro](https://github.com/chrisgrieser/obsidian-q
 Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsidian-quadro) for further information.
 
 ## Installation & Usage
+*Quadro* requires at least **Obsidian version 1.5.8**.
+
 1. [Download the vault](https://github.com/chrisgrieser/quadro-example-vault/releases/latest/download/quadro-example-vault.zip).
 2. Open the directory `quadro-example-vault` as an Obsidian vault. ([If you are new to Obsidian, see the Obsidian Documentation on how to do that.](https://help.obsidian.md/Getting+started/Create+a+vault#Open+existing+folder))
 
 ## Content of this Example Vault
+
 ### Pre-Configured Plugin Setup
 Pre-configured Obsidian settings, and a few Obsidian plugins useful for QDA are also installed:
 - **Command Palette** (`cmd+p` or `ctrl+p`) includes a list of all Quadro commands at the top. There are also buttons to the far left for all Quadro commands, briefly hover over them to see what the buttons do.
@@ -24,11 +27,11 @@ Pre-configured Obsidian settings, and a few Obsidian plugins useful for QDA are 
 - **Advanced URI**: A plugin needed for the [MarkDownload Browser Extension](https://chromewebstore.google.com/detail/markdownload-markdown-web/pcmpcfapbekmbjjkdalcgopdkipoggdi), which allows saving webpages into this vault via one click.
 
 ### Example Data
-Example Data for demonstration purposes, all stored in the folder `Data`
+A few data files for demonstration purposes, all stored in the folder `Data`
 - Two mock interviews with app developers for iOS and Android.
 	- [[Mock Interview A (iOS developer)]]
 	- [[Mock Interview B (Android developer)]]
-- A few articles downloaded with the [MarkDownload Browser Extension](https://chromewebstore.google.com/detail/markdownload-markdown-web/pcmpcfapbekmbjjkdalcgopdkipoggdi
+- A few articles downloaded with the [MarkDownload Browser Extension](https://chromewebstore.google.com/detail/markdownload-markdown-web/pcmpcfapbekmbjjkdalcgopdkipoggdi)
 - The words "iOS" and "Android" are highlighted via the *Dynamic Highlights* plugin (as you can see here).
 
 ### Example Codings & Example Extractions

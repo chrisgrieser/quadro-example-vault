@@ -69,18 +69,23 @@ body .internal-embed .markdown-embed-content {
 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
-/* DATAVIEW */
+/* USEFUL CHANGES FOR RESEARCH ITEMS */
 
 /* full line width for dataview */
 body:not(.is-mobile) :is(.markdown-source-view, .markdown-preview-view):has(.dataview.table-view-table) {
 	--file-line-width: 100%;
 }
 
+/* properties broader, so dimension are visible */
+body:not(.is-mobile) .metadata-property-key {
+	flex-grow: 1;
+}
+
 /* ────────────────────────────────────────────────────────────────────────── */
 /* FILE EXPLORER */
 
 /* bold to all the folders with special function for Quadro */
-.nav-folder-title:is([data-path="Codes"],[data-path="Analysis"], [data-path="Extractions"], [data-path="Data"]) .nav-folder-title-content {
+.nav-folder-title:is([data-path="Codes"], [data-path="Analysis"], [data-path="Extractions"], [data-path="Data"]) .nav-folder-title-content {
 	font-weight: 800;
 }
 

@@ -10,8 +10,9 @@ release:
 	git tag "v$$next_tag" && \
 	git push origin --tags
 
-# updates plugins, and by starting up also updates quadro via BRAT
+# updates plugins
 update-plugin:
 	vault_name=$$(basename "$$PWD")
 	open "obsidian://advanced-uri?vault=$$vault_name&updateplugins=true"
+	open "obsidian://advanced-uri?vault=$$vault_name&commandid=obsidian42-brat%253ABRAT-checkForUpdatesAndUpdate"
 
