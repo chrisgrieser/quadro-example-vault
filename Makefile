@@ -1,4 +1,4 @@
-.PHONY: release update-plugin
+.PHONY: release update-quadro update-plugins
 
 # As this is only an example vault, we do not need to be concerned with stuff
 # like sem-ver, simple incrementing is fine here. `pull --tags` in case of a
@@ -10,9 +10,16 @@ release:
 	git tag "v$$next_tag" && \
 	git push origin --tags
 
-# updates plugins
-update-plugin:
-	vault_name=$$(basename "$$PWD")
-	open "obsidian://advanced-uri?vault=$$vault_name&updateplugins=true"
-	open "obsidian://advanced-uri?vault=$$vault_name&commandid=obsidian42-brat%253ABRAT-checkForUpdatesAndUpdate"
+update-quadro:
+	echo "Updating Quadro…" ; \
+	quadro_repo="https://github.com/chrisgrieser/obsidian-quadro/releases/latest/download" ; \
+	quadro_path="$$PWD/.obsidian/plugins/quadro" ; \
+	curl --remote-name --silent --location "$${quadro_repo}/main.js" && \
+	curl --remote-name --silent --location "$${quadro_repo}/manifest.json" && \
+	curl --remote-name --silent --location "$${quadro_repo}/styles.css" && \
+	mv -vf main.js manifest.json styles.css "$$quadro_path"
+
+update-plugins:
+	vault_name=$$(basename "$$PWD") && \
+	open "obsidian://advanced-uri?vault=$${vault_name}&updateplugins=true"
 
