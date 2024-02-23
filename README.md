@@ -1,13 +1,21 @@
 # Quadro: Example Vault
 This is an example vault for [Quadro](https://github.com/chrisgrieser/obsidian-quadro), an Obsidian plugin that for conducting social-scientific qualitative data analysis (QDA).
 
-Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsidian-quadro) for further information.
+Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsidian-quadro) for detailed information on how to use *Quadro*.
 
-## Installation & Usage
-*Quadro* requires at least **Obsidian version 1.5.8**.
+## Table of Contents
+- [[#Installing this Vault]]
+- [[#Content of this Example Vault]]
+	* [[#Pre-Configured Plugin Setup]]
+	* [[#Example Data]]
+	* [[#Example Codings & Example Extractions]]
+- [[#Using this vault for your own research]]
+	* [[#Download Webpages]]
 
-1. [Download the vault](https://github.com/chrisgrieser/quadro-example-vault/releases/latest/download/quadro-example-vault.zip).
-2. Open the directory `quadro-example-vault` as an Obsidian vault. ([If you are new to Obsidian, see the Obsidian Documentation on how to do that.](https://help.obsidian.md/Getting+started/Create+a+vault#Open+existing+folder))
+## Installing this Vault
+1. Make sure your Obsidian version is at least 1.5.8.
+2. [Download the vault](https://github.com/chrisgrieser/quadro-example-vault/releases/latest/download/quadro-example-vault.zip).
+3. Open the directory `quadro-example-vault` as an Obsidian vault. ([If you are new to Obsidian, see the Obsidian Documentation on how to do that.](https://help.obsidian.md/Getting+started/Create+a+vault#Open+existing+folder))
 
 ## Content of this Example Vault
 
@@ -43,9 +51,10 @@ Example Codings and Extractions, in the folders `Codes` and `Extractions` respec
 If you want to use this vault for your own project, you can just delete the content of the folders `Codes`, `Extractions`, `Analysis`, and `Data`. That way, only the pre-configured plugin setup remains.
 
 > [!TIP]
-> You might want to rename this vault, so it is not titled `quadro-example-vault` anymore. To do so, click the small vault icon at the bottom left, close this window, right-click `quadro-example-vault` and select `Rename Vault…`. After that, double click your newly named vault to re-open it.
+> You might want to rename this vault, so it is not titled `quadro-example-vault` anymore. To do so, click the small vault icon at the bottom left, close this window, right-click `quadro-example-vault` and select `Rename Vault…`. After that, double-click your newly named vault to re-open it.
 
 ### Download Webpages
-To directly download webpages into your this vault, you need the [MarkDownload](https://chrome.google.com/webstore/detail/pcmpcfapbekmbjjkdalcgopdkipoggdi) Browser extension. In the settings for Markdownload, you need to enable Obsidian integration, and the name of this vault, and you are all set. (The *Advanced URI Plugin*, which is also required by *MarkDownload*, is already pre-installed in this example vault.)
+To directly download webpages into your this vault, you need the [MarkDownload](https://chrome.google.com/webstore/detail/pcmpcfapbekmbjjkdalcgopdkipoggdi) Browser extension. In the settings for MarkDownload, you need to enable Obsidian integration, and the name of this vault, and you are all set. (The *Advanced URI Plugin*, which is also required by *MarkDownload*, is already pre-installed in this example vault.)
 
-You can also import the example settings used to download the *The Verge* articles found in this vault: [[MarkDownload example settings.json]] (Just remember to change the vault name in the settings, if you change the name of this vault.)
+You can also import the example settings used to download the *Verge* articles found in this vault: [MarkDownload example settings](./Extras/MarkDownload-example-settings.json) 
+(Just remember to change the vault name in the settings, if you change the name of this vault.)
