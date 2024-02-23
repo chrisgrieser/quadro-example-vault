@@ -1,0 +1,52 @@
+{
+  "targetAttributes": [
+    "extraction-date"
+  ],
+  "targetTags": true,
+  "getFromInlineField": true,
+  "enableTabHeader": true,
+  "activateSnippet": true,
+  "enableEditor": true,
+  "enableFileList": true,
+  "enableBacklinks": true,
+  "enableQuickSwitcher": true,
+  "enableSuggestor": true,
+  "selectors": [
+    {
+      "type": "path",
+      "name": "extraction-date",
+      "value": "Extractions/",
+      "matchCaseSensitive": false,
+      "match": "startswith",
+      "uid": "927e-e9e6",
+      "selectText": true,
+      "selectAppend": false,
+      "selectPrepend": false,
+      "selectBackground": false
+    },
+    {
+      "type": "path",
+      "name": "extraction-date",
+      "value": "(Aggregation).md",
+      "matchCaseSensitive": false,
+      "match": "endswith",
+      "uid": "249c-4fc0",
+      "selectText": true,
+      "selectAppend": false,
+      "selectPrepend": false,
+      "selectBackground": false
+    },
+    {
+      "type": "path",
+      "name": "extraction-date",
+      "value": "Codes/",
+      "matchCaseSensitive": false,
+      "match": "startswith",
+      "uid": "8fae-2aa0",
+      "selectText": true,
+      "selectAppend": false,
+      "selectPrepend": false,
+      "selectBackground": false
+    }
+  ]
+}
