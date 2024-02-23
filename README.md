@@ -24,7 +24,6 @@ Pre-configured Obsidian settings, and a few Obsidian plugins useful for QDA are 
 	- Search for Data Files only via `alt+d`
 - **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via `cmd+p` or `ctrl+p`.
 - **Sortable**: Click on a Table Header to sort the table by that column.
-- **Advanced URI**: A plugin needed for the [MarkDownload Browser Extension](https://chromewebstore.google.com/detail/markdownload-markdown-web/pcmpcfapbekmbjjkdalcgopdkipoggdi), which allows saving webpages into this vault via one click.
 
 ### Example Data
 A few data files for demonstration purposes, all stored in the folder `Data`
@@ -39,3 +38,14 @@ Example Codings and Extractions, in the folders `Codes` and `Extractions` respec
 - The data was coded for [[app store]], [[WebApps]], and [[Compatibility]] issues.
 - An illustrative [[Code Co-occurrence Example]] has been done for [[app store]] and [[WebApps]]
 - A few extractions have been made on compatibility issues, and the results aggregated in a table: [[compatibility challenges (Aggregation)]]
+
+## Using this vault for your own research
+If you want to use this vault for your own project, you can just delete the content of the folders `Codes`, `Extractions`, `Analysis`, and `Data`. That way, only the pre-configured plugin setup remains.
+
+> [!TIP]
+> You might want to rename this vault, so it is not titled `quadro-example-vault` anymore. To do so, click the small vault icon at the bottom left, close this window, right-click `quadro-example-vault` and select `Rename Vault…`. After that, double click your newly named vault to re-open it.
+
+### Download Webpages
+To directly download webpages into your this vault, you need the [MarkDownload](https://chrome.google.com/webstore/detail/pcmpcfapbekmbjjkdalcgopdkipoggdi) Browser extension. In the settings for Markdownload, you need to enable Obsidian integration, and the name of this vault, and you are all set. (The *Advanced URI Plugin*, which is also required by *MarkDownload*, is already pre-installed in this example vault.)
+
+You can also import the example settings used to download the *The Verge* articles found in this vault: [[MarkDownload example settings.json]] (Just remember to change the vault name in the settings, if you change the name of this vault.)

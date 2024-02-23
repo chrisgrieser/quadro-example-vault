@@ -18,7 +18,7 @@ jobs:
         id: create-zip
         run: |
           mkdir "${{ env.REPO_NAME }}"
-          cp -r "Data" "Codes" "Extractions" "README.md" "Analysis" ".obsidian" "${{ env.REPO_NAME }}"
+          cp -r "Data" "Codes" "Extractions" "README.md" "Analysis" "Extras" ".obsidian" "${{ env.REPO_NAME }}"
           zip -r "${{ env.REPO_NAME }}.zip" "${{ env.REPO_NAME }}"
           echo "::set-output name=tag_name::$(git tag --sort version:refname | tail -n 1)"
 
