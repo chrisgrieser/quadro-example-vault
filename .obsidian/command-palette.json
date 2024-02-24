@@ -8,11 +8,11 @@
     "quadro:unassign-code",
     "quadro:delete-code-everywhere",
     "quadro:rename-code",
-    "quadro:merge-codes",
     "quadro:bulk-create-new-code-files",
     "quadro:extract-from-paragraph",
     "quadro:create-new-extraction-type",
     "quadro:aggregate-extractions",
-    "quadro:export-all-extractions-as-csv"
+    "quadro:export-all-extractions-as-csv",
+    "workspace:export-pdf"
   ]
 }

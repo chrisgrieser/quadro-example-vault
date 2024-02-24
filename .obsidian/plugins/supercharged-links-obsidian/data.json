@@ -1,7 +1,5 @@
 {
-  "targetAttributes": [
-    "extraction-date"
-  ],
+  "targetAttributes": [],
   "targetTags": true,
   "getFromInlineField": true,
   "enableTabHeader": true,
