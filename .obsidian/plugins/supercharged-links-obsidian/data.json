@@ -1,7 +1,7 @@
 {
   "targetAttributes": [],
   "targetTags": true,
-  "getFromInlineField": true,
+  "getFromInlineField": false,
   "enableTabHeader": true,
   "activateSnippet": true,
   "enableEditor": true,

@@ -6,7 +6,7 @@
   "themesList": [],
   "updateAtStartup": true,
   "updateThemesAtStartup": false,
-  "enableAfterInstall": true,
+  "enableAfterInstall": false,
   "loggingEnabled": false,
   "loggingPath": "BRAT-log",
   "loggingVerboseEnabled": false,
