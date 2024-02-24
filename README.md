@@ -52,6 +52,7 @@ A few data files for demonstration purposes, all stored in the folder `Data`
 Example Codings and Extractions, in the folders `Codes` and `Extractions` respectively.
 - The data was coded for [[app store]], [[WebApps]], and [[Compatibility]] issues.
 - An illustrative [[Code Co-occurrence Example]] has been done for [[app store]] and [[WebApps]]
+- You can click at the Graph Button in the left sidebar (or `ctrl+g`/ `cmd+g`) to open the Graph View. It has been configured to display only Data Files and Code Files.
 - A few extractions have been made on compatibility issues, and the results aggregated in a table: [[compatibility challenges (Aggregation)]]
 
 ## Using this vault for your own research
