@@ -2,7 +2,7 @@
 1. Go to the `Obsidian Settings` → `AI Note Summary`.
 2. Enter you [OpenAI-API key](https://platform.openai.com/api-keys), and close the settings again.
 3. In the left sidebar, use click the pen-shaped button. Alternatively, use the command palette (`cmd+p` on macOS and `ctrl+p` on Windows), and search for `AI Notes Summary: Summarize References Notes`.
-4. ℹ️ As the name suggests, **only notes linked to from this note** are affected.
+4. ℹ️ As the name suggests, **only notes linked to from this note** are affected. Also note that OpenAI has (currently) a context limit of 16.000 characters, meaning the summaries will not work reliably when the total length of the linked documents is larger.
 
 
 > [!WARNING]
