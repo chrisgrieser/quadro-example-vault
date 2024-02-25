@@ -57,8 +57,8 @@ A few example codes can be found in the folder `Codes`.
  
 ### Example Extractions
  A few example extractions can be found in the folder `Extractions`.
-- Some extractions have been made on compatibility issues, and the results aggregated in a dynamic table (called "Looms", since provided by the **Data Loom** Plugin): [[Compatibility Issues (Aggregation).loom]]
-- There is also an [[Example Search for Extraction Dimensions]], where only extractions are listed where the dimension "type of compatibility" contains "backwards".
+- Some extractions have been made on compatibility issues, and the results aggregated in a dynamic table (called "Looms", since provided by the **Data Loom** Plugin): [[compatibility challenges (Aggregation).loom]]
+- There is also an [[Example Search for Co-occurrent Extraction Dimensions]], extractions where two dimensions have a specific value.
 
 ## Using this vault for your own research
 If you want to use this vault for your own project, you can just delete the content of the folders `Codes`, `Extractions`, `Analysis`, and `Data`. That way, only the pre-configured plugin setup remains.
