@@ -4,5 +4,6 @@
   "showViewHeader": true,
   "enabledCssSnippets": [
     "minor-adjustments"
-  ]
+  ],
+  "nativeMenus": false
 }

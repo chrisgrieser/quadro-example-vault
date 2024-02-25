@@ -20,23 +20,21 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 
 ## Pre-Configured Plugin Setup
 - **Quadro** itself
-	- There are buttons to the far left for all Quadro commands. Briefly hover over them to see what the buttons do.
-	- Quadro is configured to be auto-updated via the BRAT plugin.
-- **Dataview**: The data analysis plugin
+	- There are buttons to the far left for all Quadro commands. Briefly hover over them to see what each button does.
+	- Quadro is configured to be auto-updated via the **BRAT plugin**.
+- **Data Loom:** Analyze extractions in a dynamic spreadsheet, similar to Notion or Excel.
 - **Dynamic Highlights**: Highlight specific words throughout the vault. Useful to highlight keywords in the data. 
 	- In this example vault, the words "iOS" and "Android" are highlighted (as you can see here).
-- **Hover Editor**: Useful to "peek" into existing files and make edits to them. Hover over a while holding `cmd` (macOS) or `ctrl` (Windows) to open a small hover window, where you can even make edits.
 - **Another Quick Switcher**
 	- Search for Code Files only via `alt+c`.
 	- Search for Extraction Files only via `alt+e`.
 	- Search for Data Files only via `alt+d`.
 - **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via `cmd+p` or `ctrl+p`.
-- **Sortable**: Click on a Table Header to sort the table by that column.
 - **Supercharged Links:** Visually distinguish links to Code Files and links to Extraction Files:
 	- Example link to a Code File: [[Compatibility]]
 	- Example link to a Extraction File: [[app store problem/1]]
-	- The plugin also allows you to color different individual Codes or individual Extraction Types differently.
-- **Style Settings**: Customize the appearance of popups from **Hover Editor** and the links from **Supercharged Links**.
+	- The plugin also allows you to color different individual codes or extraction types differently.
+	Customize the appearance of the links via the companion plugin **Style Settings**.
 - **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
 - **Properties View**: View all properties ( = extraction dimensions) in the entire vault, click on them to search for them directly.
 
@@ -59,7 +57,7 @@ A few example codes can be found in the folder `Codes`.
  
 ### Example Extractions
  A few example extractions can be found in the folder `Extractions`.
-- Some extractions have been made on compatibility issues, and the results aggregated in a table: [[compatibility challenges (Aggregation)]]
+- Some extractions have been made on compatibility issues, and the results aggregated in a dynamic table (called "Looms", since provided by the **Data Loom** Plugin): [[Compatibility Issues (Aggregation).loom]]
 - There is also an [[Example Search for Extraction Dimensions]], where only extractions are listed where the dimension "type of compatibility" contains "backwards".
 
 ## Using this vault for your own research

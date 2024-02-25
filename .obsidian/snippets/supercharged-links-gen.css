@@ -17,7 +17,7 @@ div[data-id="927e-e9e6"] div.setting-item-description,
 }
 
 div[data-id="249c-4fc0"] div.setting-item-description,
-[data-link-path$="(Aggregation).md" i] {
+[data-link-path$=".loom" i] {
     color: var(--249c-4fc0-color) !important;
     font-weight: var(--249c-4fc0-weight);
 }
@@ -67,7 +67,7 @@ settings:
             - line-through
     - 
         id: 249c-4fc0
-        title: path is (Aggregation).md
+        title: path is .loom
         description: Example note
         type: heading
         collapsed: true

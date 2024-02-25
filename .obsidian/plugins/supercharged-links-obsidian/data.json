@@ -25,7 +25,7 @@
     {
       "type": "path",
       "name": "extraction-date",
-      "value": "(Aggregation).md",
+      "value": ".loom",
       "matchCaseSensitive": false,
       "match": "endswith",
       "uid": "249c-4fc0",
