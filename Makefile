@@ -5,7 +5,7 @@
 # shallow clone with `--no-tags`.
 release: 
 	make update-quadro ; \
-	git pull --tags && \
+	git fetch --tags && \
 	last_tag=$$(git describe --tags --abbrev=0 | tr -d 'v') && \
 	next_tag=$$((last_tag + 1)) && \
 	git tag "v$$next_tag" && \
@@ -19,7 +19,7 @@ update-quadro:
 	curl --remote-name --silent --location "$${quadro_repo}/manifest.json" && \
 	curl --remote-name --silent --location "$${quadro_repo}/styles.css" && \
 	mv -vf main.js manifest.json styles.css "$$quadro_path" && \
-	git add "$$quadro_path" && git commit -m "chore: update Quadro version" ; \
+	git add "$$quadro_path" && git commit -m "chore: update Quadro version" || git push ; \
 	echo "------"
 
 update-plugins:
