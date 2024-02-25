@@ -1,4 +1,9 @@
-.PHONY: release update-quadro update-plugins
+.PHONY: open-vault release update-quadro update-plugins
+#───────────────────────────────────────────────────────────────────────────────
+
+open-vault: 
+	vault_name=$$(basename "$$PWD") && \
+	open "obsidian://open?vault=$$vault_name&file=README"
 
 # As this is only an example vault, we do not need to be concerned with stuff
 # like sem-ver, simple incrementing is fine here. `pull --tags` in case of a
@@ -10,6 +15,8 @@ release:
 	next_tag=$$((last_tag + 1)) && \
 	git tag "v$$next_tag" && \
 	git push origin --tags
+
+#───────────────────────────────────────────────────────────────────────────────
 
 update-quadro:
 	echo "Updating Quadro…" ; \
