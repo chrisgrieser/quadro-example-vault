@@ -8,7 +8,8 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 * [[#Pre-Configured Plugin Setup]]
 * [[#Demonstration of QDA with Quadro]]
 	* [[#Example Data]]
-	* [[#Example Codings & Example Extractions]]
+	* [[#Example Codings]]
+	* [[#Example Extractions]]
 - [[#Using this vault for your own research]]
 	* [[#Download Webpages]]
 
@@ -18,9 +19,9 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 3. Open the directory `quadro-example-vault` as an Obsidian vault. ([If you are new to Obsidian, see the Obsidian Documentation on how to do that.](https://help.obsidian.md/Getting+started/Create+a+vault#Open+existing+folder))
 
 ## Pre-Configured Plugin Setup
-Pre-configured Obsidian settings, and a few Obsidian plugins useful for QDA are also installed:
-- **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all Quadro commands at the top. There are also buttons to the far left for all Quadro commands, briefly hover over them to see what the buttons do.
-- **Quadro** itself (configured to be auto-updated via the BRAT plugin)
+- **Quadro** itself
+	- There are buttons to the far left for all Quadro commands. Briefly hover over them to see what the buttons do.
+	- Quadro is configured to be auto-updated via the BRAT plugin.
 - **Dataview**: The data analysis plugin
 - **Dynamic Highlights**: Highlight specific words throughout the vault. Useful to highlight keywords in the data. 
 	- In this example vault, the words "iOS" and "Android" are highlighted (as you can see here).
@@ -36,6 +37,8 @@ Pre-configured Obsidian settings, and a few Obsidian plugins useful for QDA are 
 	- Example link to a Extraction File: [[app store problem/1]]
 	- The plugin also allows you to color different individual Codes or individual Extraction Types differently.
 - **Style Settings**: Customize the appearance of popups from **Hover Editor** and the links from **Supercharged Links**.
+- **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
+- **Properties View**: View all properties ( = extraction dimensions) in the entire vault, click on them to search for them directly.
 
 ## Demonstration of QDA with Quadro
 ### Example Data
@@ -48,12 +51,16 @@ A few data files for demonstration purposes, all stored in the folder `Data`
 	- [[Verge Article B]]
 	- [[Verge Article C]]
 
-### Example Codings & Example Extractions
-Example Codings and Extractions, in the folders `Codes` and `Extractions` respectively.
+### Example Codings
+A few example codes can be found in the folder `Codes`.
 - The data was coded for [[app store]], [[WebApps]], and [[Compatibility]] issues.
-- An illustrative [[Code Co-occurrence Example]] has been done for [[app store]] and [[WebApps]]
+- An illustrative [[Example Code Co-occurrence]] has been done for [[app store]] and [[WebApps]]
 - You can click at the Graph Button in the left sidebar (or `ctrl+g`/ `cmd+g`) to open the Graph View. It has been configured to display only Data Files and Code Files.
-- A few extractions have been made on compatibility issues, and the results aggregated in a table: [[compatibility challenges (Aggregation)]]
+ 
+### Example Extractions
+ A few example extractions can be found in the folder `Extractions`.
+- Some extractions have been made on compatibility issues, and the results aggregated in a table: [[compatibility challenges (Aggregation)]]
+- There is also an [[Example Search for Extraction Dimensions]], where only extractions are listed where the dimension "type of compatibility" contains "backwards".
 
 ## Using this vault for your own research
 If you want to use this vault for your own project, you can just delete the content of the folders `Codes`, `Extractions`, `Analysis`, and `Data`. That way, only the pre-configured plugin setup remains.
@@ -64,5 +71,4 @@ If you want to use this vault for your own project, you can just delete the cont
 ### Download Webpages
 To directly download webpages into your this vault, you need the [MarkDownload](https://chrome.google.com/webstore/detail/pcmpcfapbekmbjjkdalcgopdkipoggdi) Browser extension. In the settings for MarkDownload, you need to enable Obsidian integration, and the name of this vault, and you are all set. (The *Advanced URI Plugin*, which is also required by *MarkDownload*, is already pre-installed in this example vault.)
 
-You can also import the example settings used to download the *Verge* articles found in this vault: [MarkDownload example settings](./Extras/MarkDownload-example-settings.json) 
-(Just remember to change the vault name in the settings, if you change the name of this vault.)
+You can also import the example settings used to download the *Verge* articles found in this vault: [MarkDownload example settings](./Extras/MarkDownload-example-settings.json). (Just remember to change the vault name in the settings, if you change the name of this vault.)

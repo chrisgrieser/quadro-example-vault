@@ -3,7 +3,9 @@
   "global-search",
   "switcher",
   "graph",
+  "properties",
   "page-preview",
   "command-palette",
+  "bookmarks",
   "file-recovery"
 ]
