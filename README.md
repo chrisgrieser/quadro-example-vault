@@ -29,14 +29,16 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- Search for Code Files only via `alt+c`.
 	- Search for Extraction Files only via `alt+e`.
 	- Search for Data Files only via `alt+d`.
-- **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via `cmd+p` or `ctrl+p`.
+- **Properties View**: View all properties ( = extraction dimensions) in the entire vault, left-click on them to search for them directly, right-click to rename dimensions globally.
+- **AI Summary**: Use AI to summarize documents. (Requires an OpenAI Account.)
 - **Supercharged Links:** Visually distinguish links to Code Files and links to Extraction Files:
 	- Example link to a Code File: [[Compatibility]]
 	- Example link to a Extraction File: [[app store problem/1]]
 	- The plugin also allows you to color different individual codes or extraction types differently.
 	Customize the appearance of the links via the companion plugin **Style Settings**.
 - **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
-- **Properties View**: View all properties ( = extraction dimensions) in the entire vault, click on them to search for them directly.
+- **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via the **Command Palette**.
+
 
 ## Demonstration of QDA with Quadro
 ### Example Data
@@ -48,6 +50,7 @@ A few data files for demonstration purposes, all stored in the folder `Data`
 	- [[Verge Article A]]
 	- [[Verge Article B]]
 	- [[Verge Article C]]
+- The file [[AI-supported Summaries]] contains instructions for creating summaries with OpenAI.
 
 ### Example Codings
 A few example codes can be found in the folder `Codes`.
