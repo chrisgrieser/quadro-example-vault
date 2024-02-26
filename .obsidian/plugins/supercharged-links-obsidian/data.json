@@ -45,6 +45,18 @@
       "selectAppend": false,
       "selectPrepend": false,
       "selectBackground": false
+    },
+    {
+      "type": "path",
+      "name": "",
+      "value": "Data/",
+      "matchCaseSensitive": true,
+      "match": "startswith",
+      "uid": "f997-3cec",
+      "selectText": false,
+      "selectAppend": false,
+      "selectPrepend": true,
+      "selectBackground": false
     }
   ]
 }

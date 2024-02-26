@@ -9,11 +9,11 @@ A: One of the primary challenges I face as an app developer targeting the Androi
 
 **Q2: How do you address the issue of fragmentation while developing for Android?**
 
-A: To address fragmentation, I employ various strategies such as responsive design principles and device-specific optimizations. By using responsive design, I can ensure that the app adapts seamlessly to different screen sizes and resolutions, providing a consistent user experience. Additionally, I leverage device-specific features and APIs to optimize performance and functionality on specific devices, ensuring that the app performs well across a wide range of hardware configurations.
+A: ==To address fragmentation, I employ various strategies such as responsive design principles and device-specific optimizations==. By using responsive design, I can ensure that the app adapts seamlessly to different screen sizes and resolutions, providing a consistent user experience. Additionally, I leverage device-specific features and APIs to optimize performance and functionality on specific devices, ensuring that the app performs well across a wide range of hardware configurations. [[fragmentation]] ^id-252057
 
 **Q3: Apart from fragmentation, what other challenges do you encounter during Android app development?**
 
-A: Another significant challenge is ==platform compatibility and version fragmentation==. Android devices run on different versions of the operating system, each with its own set of features and capabilities. This requires careful consideration when selecting the minimum supported Android version for the app and implementing backward compatibility for older devices. Additionally, keeping up with the latest Android updates and features while ensuring compatibility with older versions can be a complex and time-consuming process. [[Compatibility]] [[compatibility challenges/4]] ^id-648434
+A: Another significant challenge is ==platform compatibility and version fragmentation==. Android devices run on different versions of the operating system, each with its own set of features and capabilities. This requires careful consideration when selecting the minimum supported Android version for the app and implementing backward compatibility for older devices. Additionally, keeping up with the latest Android updates and features while ensuring compatibility with older versions can be a complex and time-consuming process. [[Compatibility]] [[compatibility challenges/4]] [[fragmentation]] ^id-648434
 
 **Q4: How do you manage platform compatibility and version fragmentation in your app development process?**
 

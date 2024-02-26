@@ -2,7 +2,6 @@
 description: "practices and issues related to dealing with the app store"
 ---
 
-
 ---
 
 ![[Data/Mock Interview B (Android developer)#^id-903203]]

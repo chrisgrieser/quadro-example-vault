@@ -5,8 +5,8 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 
 ## Table of Contents
 - [[#Installing this Vault]]
-* [[#Pre-Configured Plugin Setup]]
-* [[#Demonstration of QDA with Quadro]]
+- [[#Pre-Configured Plugin Setup]]
+- [[#Demonstration of QDA with Quadro]]
 	* [[#Example Data]]
 	* [[#Example Codings]]
 	* [[#Example Extractions]]
@@ -31,11 +31,12 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- Search for Data Files only via `alt+d`.
 - **Properties View**: View all properties ( = extraction dimensions) in the entire vault, left-click on them to search for them directly, right-click to rename dimensions globally.
 - **AI Summary**: Use AI to summarize documents. (Requires an OpenAI Account.)
-- **Supercharged Links:** Visually distinguish links to Code Files and links to Extraction Files:
-	- Example link to a Code File: [[Compatibility]]
-	- Example link to a Extraction File: [[app store problem/1]]
+- **Supercharged Links:** Visually distinguish links to different sorts of files:
+	- Example link to a Code File (yellow): [[Compatibility]]
+	- Example link to a Extraction File (green): [[app store problem/1]]
+	- Example link to a Data File (document emoji): [[Verge Article A]]
 	- The plugin also allows you to color different individual codes or extraction types differently.
-	Customize the appearance of the links via the companion plugin **Style Settings**.
+	- The types of linkes are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin.
 - **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
 - **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via the **Command Palette**.
 
@@ -57,6 +58,7 @@ A few example codes can be found in the folder `Codes`.
 - The data was coded for [[app store]], [[WebApps]], and [[Compatibility]] issues.
 - An illustrative [[Example Code Co-occurrence]] has been done for [[app store]] and [[WebApps]]
 - You can click at the Graph Button in the left sidebar (or `ctrl+g`/ `cmd+g`) to open the Graph View. It has been configured to display only Data Files and Code Files.
+- Using the **Canvas** Plugin, relationship between entities can be explored. Here, it is used as an [[Axial Coding Example.canvas|Example for Axial Coding]].
  
 ### Example Extractions
  A few example extractions can be found in the folder `Extractions`.

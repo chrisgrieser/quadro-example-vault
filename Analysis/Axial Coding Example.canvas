@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"578aaa81a4530e43","type":"text","text":"[[WebApps]]","x":-720,"y":-20,"width":140,"height":60},
+		{"id":"7500158380b4b114","type":"text","text":"In this canvas, we created new **cards with a link to a Code File** , added by typing `[[WebApps]]`.\n\nAs an alternative, we can also drag a **Code File itself**, as done with the `app store` file. It lets us see the *content* of the note itself, in which we can freely scroll, but it also requires more spaces.\n\nCards, Files, and relationships work via Drag'n'Drop.\n\n","x":-735,"y":-320,"width":465,"height":260,"color":"5"},
+		{"id":"2f1cf6eec941b698","x":-1300,"y":0,"width":300,"height":320,"type":"file","file":"Codes/fragmentation.md"},
+		{"id":"8bf0850f0e05f8c0","type":"file","file":"Codes/app store.md","x":-160,"y":-30,"width":360,"height":560},
+		{"id":"31d9bd60b61c9e72","type":"text","text":"[[Compatibility]]","x":-820,"y":220,"width":170,"height":60}
+	],
+	"edges":[
+		{"id":"222fa3bf8b9c4bb7","fromNode":"31d9bd60b61c9e72","fromSide":"top","toNode":"578aaa81a4530e43","toSide":"bottom","color":"1","label":"works on both operating system"},
+		{"id":"13ba6a0c325f052c","fromNode":"578aaa81a4530e43","fromSide":"right","toNode":"8bf0850f0e05f8c0","toSide":"left","fromEnd":"arrow","label":"alternatives"},
+		{"id":"36b1487c617cf3c2","fromNode":"2f1cf6eec941b698","fromSide":"right","toNode":"31d9bd60b61c9e72","toSide":"left","toEnd":"none"}
+	]
+}
