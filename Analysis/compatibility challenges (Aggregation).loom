@@ -1,1 +1,266 @@
-{"pluginVersion":"8.15.12","model":{"columns":[{"id":"20a4d6c9-e8d3-4238-adab-ecddb0ecee7f","width":"50px","content":"Source","sortDir":"default","isVisible":false,"type":"source","numberPrefix":"","numberSuffix":"","numberSeparator":"","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":false,"tags":[],"calculationType":"none","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset","frontmatterKey":null},{"id":"be35e2e3-b331-4584-81b1-a1d7274cbfef","width":"40px","content":"Extraction File","sortDir":"default","isVisible":true,"type":"source-file","numberPrefix":"","numberSuffix":"","numberSeparator":"","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":true,"tags":[],"calculationType":"count-all","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset","frontmatterKey":null},{"id":"9e446f01-4097-4ed7-b3b2-d667c4e1a504","type":"text","frontmatterKey":"type of compatibility","sortDir":"default","isVisible":true,"width":"200px","numberPrefix":"","numberSuffix":"","numberSeparator":"","content":"type of compatibility","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":true,"tags":[],"calculationType":"none","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset"},{"id":"a81c66aa-ee0e-4c58-abec-efc37bae00d4","type":"text","frontmatterKey":"cause of the issue","sortDir":"default","isVisible":true,"width":"200px","numberPrefix":"","numberSuffix":"","numberSeparator":"","content":"cause of the issue","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":true,"tags":[],"calculationType":"none","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset"},{"id":"66196b9d-8025-4c8e-acc6-86cb59eecd8b","type":"multi-tag","frontmatterKey":"solutions","sortDir":"default","isVisible":true,"width":"200px","numberPrefix":"","numberSuffix":"","numberSeparator":"","content":"solutions","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":true,"tags":[],"calculationType":"none","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset"},{"id":"960f9165-fef7-4204-92f5-03fc7e057e41","type":"multi-tag","frontmatterKey":"OS","sortDir":"default","isVisible":true,"width":"200px","numberPrefix":"","numberSuffix":"","numberSeparator":"","content":"OS","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":true,"tags":[],"calculationType":"none","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset"},{"id":"0d09e94e-db8f-4cd6-97b5-6ddef80d878a","type":"text","frontmatterKey":"extraction source","sortDir":"default","isVisible":true,"width":"200px","numberPrefix":"","numberSuffix":"","numberSeparator":"","content":"extraction source","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":true,"tags":[],"calculationType":"none","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset"},{"id":"dce09607-0144-4c84-9c2b-4b200f0030c8","type":"text","frontmatterKey":"extraction date","sortDir":"default","isVisible":true,"width":"200px","numberPrefix":"","numberSuffix":"","numberSeparator":"","content":"extraction date","numberFormat":"number","currencyType":"USD","dateFormat":"mmddyyyy","dateFormatSeparator":"-","hour12":false,"includeTime":false,"shouldWrapOverflow":true,"tags":[],"calculationType":"none","aspectRatio":"unset","horizontalPadding":"unset","verticalPadding":"unset"}],"rows":[],"filters":[{"id":"0b716529-f3c2-4cf0-bc8a-fd0428fc06dd","columnId":"be35e2e3-b331-4584-81b1-a1d7274cbfef","operator":"or","isEnabled":true,"type":"source-file","condition":"is-not","text":"Template"}],"sources":[{"id":"2debd3cb-6c2b-4515-971b-edd4e3d4f30f","type":"folder","path":"Extractions/compatibility challenges","includeSubfolders":false}],"settings":{"numFrozenColumns":1,"showCalculationRow":false},"externalRowOrder":[]}}
+{
+  "pluginVersion": "8.15.12",
+  "model": {
+    "columns": [
+      {
+        "id": "20a4d6c9-e8d3-4238-adab-ecddb0ecee7f",
+        "width": "50px",
+        "content": "Source",
+        "sortDir": "default",
+        "isVisible": false,
+        "type": "source",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": false,
+        "shouldWrapOverflow": false,
+        "tags": [],
+        "calculationType": "none",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset",
+        "frontmatterKey": null
+      },
+      {
+        "id": "be35e2e3-b331-4584-81b1-a1d7274cbfef",
+        "width": "40px",
+        "content": "Extraction File",
+        "sortDir": "default",
+        "isVisible": true,
+        "type": "source-file",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": false,
+        "shouldWrapOverflow": true,
+        "tags": [],
+        "calculationType": "count-all",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset",
+        "frontmatterKey": null
+      },
+      {
+        "id": "9e446f01-4097-4ed7-b3b2-d667c4e1a504",
+        "type": "text",
+        "frontmatterKey": "type of compatibility",
+        "sortDir": "default",
+        "isVisible": true,
+        "width": "200px",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "content": "type of compatibility",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": false,
+        "shouldWrapOverflow": true,
+        "tags": [],
+        "calculationType": "none",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset"
+      },
+      {
+        "id": "a81c66aa-ee0e-4c58-abec-efc37bae00d4",
+        "type": "text",
+        "frontmatterKey": "cause of the issue",
+        "sortDir": "default",
+        "isVisible": true,
+        "width": "200px",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "content": "cause of the issue",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": false,
+        "shouldWrapOverflow": true,
+        "tags": [],
+        "calculationType": "none",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset"
+      },
+      {
+        "id": "66196b9d-8025-4c8e-acc6-86cb59eecd8b",
+        "type": "multi-tag",
+        "frontmatterKey": "solutions",
+        "sortDir": "default",
+        "isVisible": true,
+        "width": "200px",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "content": "solutions",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": false,
+        "shouldWrapOverflow": true,
+        "tags": [
+          {
+            "id": "e89ded7d-0755-47de-bcc8-c3bc212ab9af",
+            "content": "minimum-OS-version selection",
+            "color": "light gray"
+          },
+          {
+            "id": "18b1f6bd-a783-4ba7-98eb-6c43f909b530",
+            "content": "none",
+            "color": "purple"
+          },
+          {
+            "id": "45ab8c3c-2cc9-4d77-9951-a80760faa647",
+            "content": "support libraries",
+            "color": "light gray"
+          },
+          {
+            "id": "8103f442-05d3-4aba-a0a6-ed3347d3bfa5",
+            "content": "compatibility-APIs",
+            "color": "light gray"
+          },
+          {
+            "id": "89a7c08e-9efe-4798-9240-2707dae4d613",
+            "content": "monitor adaption trends",
+            "color": "purple"
+          },
+          {
+            "id": "dec69d46-7f7a-4ef9-92e3-c7cdcba1bd00",
+            "content": "vet 3rd-party providers",
+            "color": "light gray"
+          }
+        ],
+        "calculationType": "none",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset"
+      },
+      {
+        "id": "960f9165-fef7-4204-92f5-03fc7e057e41",
+        "type": "multi-tag",
+        "frontmatterKey": "OS",
+        "sortDir": "default",
+        "isVisible": true,
+        "width": "200px",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "content": "OS",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": false,
+        "shouldWrapOverflow": true,
+        "tags": [
+          {
+            "id": "454d6428-254e-425a-92fe-4cc332b1079c",
+            "content": "Android",
+            "color": "purple"
+          },
+          {
+            "id": "466d061c-eace-4e0e-bced-82940e9ca93e",
+            "content": "iOS",
+            "color": "blue"
+          }
+        ],
+        "calculationType": "none",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset"
+      },
+      {
+        "id": "0d09e94e-db8f-4cd6-97b5-6ddef80d878a",
+        "type": "text",
+        "frontmatterKey": "extraction source",
+        "sortDir": "default",
+        "isVisible": true,
+        "width": "200px",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "content": "extraction source",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": false,
+        "shouldWrapOverflow": true,
+        "tags": [],
+        "calculationType": "none",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset"
+      },
+      {
+        "id": "dce09607-0144-4c84-9c2b-4b200f0030c8",
+        "type": "date",
+        "frontmatterKey": "extraction date",
+        "sortDir": "default",
+        "isVisible": true,
+        "width": "200px",
+        "numberPrefix": "",
+        "numberSuffix": "",
+        "numberSeparator": "",
+        "content": "extraction date",
+        "numberFormat": "number",
+        "currencyType": "USD",
+        "dateFormat": "mmddyyyy",
+        "dateFormatSeparator": "-",
+        "hour12": false,
+        "includeTime": true,
+        "shouldWrapOverflow": true,
+        "tags": [],
+        "calculationType": "none",
+        "aspectRatio": "unset",
+        "horizontalPadding": "unset",
+        "verticalPadding": "unset"
+      }
+    ],
+    "rows": [],
+    "filters": [
+      {
+        "id": "0b716529-f3c2-4cf0-bc8a-fd0428fc06dd",
+        "columnId": "be35e2e3-b331-4584-81b1-a1d7274cbfef",
+        "operator": "or",
+        "isEnabled": true,
+        "type": "source-file",
+        "condition": "is-not",
+        "text": "Template"
+      }
+    ],
+    "sources": [
+      {
+        "id": "2debd3cb-6c2b-4515-971b-edd4e3d4f30f",
+        "type": "folder",
+        "path": "Extractions/compatibility challenges",
+        "includeSubfolders": false
+      }
+    ],
+    "settings": {
+      "numFrozenColumns": 1,
+      "showCalculationRow": false
+    },
+    "externalRowOrder": []
+  }
+}

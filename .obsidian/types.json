@@ -6,6 +6,7 @@
     "keywords": "multitext",
     "solutions": "multitext",
     "OS": "multitext",
-    "download date": "date"
+    "download date": "date",
+    "extraction date": "datetime"
   }
 }

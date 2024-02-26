@@ -4,7 +4,7 @@
   "spellcheck": false,
   "autoPairBrackets": false,
   "autoPairMarkdown": false,
-  "trashOption": "local",
+  "trashOption": "system",
   "alwaysUpdateLinks": true,
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "./attachments",
