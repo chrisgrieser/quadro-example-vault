@@ -24,9 +24,10 @@ update-quadro:
 	curl --remote-name --silent --location "$${quadro_repo}/main.js" && \
 	curl --remote-name --silent --location "$${quadro_repo}/manifest.json" && \
 	curl --remote-name --silent --location "$${quadro_repo}/styles.css" && \
+	new_version=$$(grep "version" "manifest.json" | cut -d\" -f4) && \
 	mv -vf main.js manifest.json styles.css "$$quadro_path" && \
-	git add "$$quadro_path" && new_version=$$(grep "version" "manifest.json" | cut -d\" -f4) && \
-	git commit -m "chore: update Quadro to $${new_version}" && echo "Quadro updated to $${new_version}" ; \
+	git add "$$quadro_path" && git commit -m "chore: update Quadro to $${new_version}" && \
+	echo "Quadro updated to $${new_version}" ; \
 	echo "------"
 
 update-plugins:
