@@ -33,7 +33,7 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 - **AI Summary**: Use AI to summarize documents. (Requires an OpenAI Account.)
 - **Supercharged Links:** Visually distinguish links to different sorts of files:
 	- Example link to a Code File (yellow): [[Compatibility]]
-	- Example link to a Extraction File (green): [[app store problem/1]]
+	- Example link to a Extraction File (green): [[app store problem 1]]
 	- Example link to a Data File (document emoji): [[Verge Article A]]
 	- The plugin also allows you to color different individual codes or extraction types differently.
 	- The types of linkes are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin.
