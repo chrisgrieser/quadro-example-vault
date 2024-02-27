@@ -37,6 +37,7 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- Example link to a Data File (document emoji): [[Verge Article A]]
 	- The plugin also allows you to color different individual codes or extraction types differently.
 	- The types of linkes are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin.
+- **Hover Editor:** Hold `cmd` (macOS) or `ctrl` (Windows) and hover the mouse over a link to open a popup of the linked file, which you can modify.
 - **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
 - **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via the **Command Palette**.
 
