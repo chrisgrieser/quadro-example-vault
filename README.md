@@ -34,7 +34,9 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- right-click to rename dimensions globally
 	- Access via Command Palette or the "Box" Icon at the top left.
 - **Multi-Properties:** In the file explorer, select multiple notes and click them to add/remove multiple properties at once.
-- **AI Summary**: Use AI to summarize documents. (Requires an OpenAI Account.)
+- **Ollama:** Integrates Ollama, a *locally running* AI. Can be used to summarize documents.
+	- As a local AI model, no data leaves the machine, making it satisfying the privacy requirements of social research.
+	- Requires the having installed the [Ollama App](https://ollama.com/).
 - **Dynamic Highlights**: Highlight specific words throughout the vault. Useful to highlight keywords in the data. 
 	- In this example vault, the words "iOS" and "Android" are highlighted (as you can see here).
 - **Supercharged Links:** Visually distinguish links to different sorts of files:
