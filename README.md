@@ -22,23 +22,27 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 - **Quadro** itself
 	- There are buttons to the far left for all Quadro commands. Briefly hover over them to see what each button does.
 	- Quadro is configured to be auto-updated via the **BRAT plugin**.
+- **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
 - **Data Loom:** Analyze extractions in a dynamic spreadsheet, similar to Notion or Excel.
-- **Dynamic Highlights**: Highlight specific words throughout the vault. Useful to highlight keywords in the data. 
-	- In this example vault, the words "iOS" and "Android" are highlighted (as you can see here).
 - **Another Quick Switcher**
 	- Search for Code Files only via `alt+c`.
 	- Search for Extraction Files only via `alt+e`.
 	- Search for Data Files only via `alt+d`.
-- **Properties View**: View all properties ( = extraction dimensions) in the entire vault, left-click on them to search for them directly, right-click to rename dimensions globally.
+- **Properties View
+	- View all properties ( = extraction dimensions) in the entire vault.
+	- left-click on them to search for them
+	- right-click to rename dimensions globally
+	- Access via Command Palette or the "Box" Icon at the top left.
+- **Multi-Properties:** In the file explorer, select multiple notes and click them to add/remove multiple properties at once.
 - **AI Summary**: Use AI to summarize documents. (Requires an OpenAI Account.)
+- **Dynamic Highlights**: Highlight specific words throughout the vault. Useful to highlight keywords in the data. 
+	- In this example vault, the words "iOS" and "Android" are highlighted (as you can see here).
 - **Supercharged Links:** Visually distinguish links to different sorts of files:
 	- Example link to a Code File (yellow): [[Compatibility]]
 	- Example link to a Extraction File (green): [[app store problem 1]]
 	- Example link to a Data File (document emoji): [[Verge Article A]]
-	- The plugin also allows you to color different individual codes or extraction types differently.
-	- The types of linkes are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin.
+	- The plugin also allows you to color different individual codes or extraction types differently. The types of linkes are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin, in their respective settings menu.
 - **Hover Editor:** Hold `cmd` (macOS) or `ctrl` (Windows) and hover the mouse over a link to open a popup of the linked file, which you can modify.
-- **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
 - **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via the **Command Palette**.
 
 

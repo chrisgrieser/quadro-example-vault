@@ -1,3 +1,6 @@
+---
+datatype: interview
+---
 *This is a fictional interview, generated via ChatGPT, using the following prompt:*
 > Generate a mock interview, consisting of 10 questions and 10 answers. The answers should be 1-2 paragraphs long. The interviewer is a social scientist, the interviewee is an app developer. The topic of the interview is what problems the app developer faces when developing an app for **iOS**. Prepend the questions with "Q", and the answers with "A".
 
