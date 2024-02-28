@@ -56,7 +56,7 @@ A few data files for demonstration purposes, all stored in the folder `Data`
 	- [[Verge Article A]]
 	- [[Verge Article B]]
 	- [[Verge Article C]]
-- The file [[AI-supported Summaries]] contains instructions for creating summaries with OpenAI.
+- The file [[AI-supported Summaries]] contains instructions for creating summaries with OpenAI and the **AI Summary** plugin.
 
 ### Example Codings
 A few example codes can be found in the folder `Codes`.
@@ -67,7 +67,7 @@ A few example codes can be found in the folder `Codes`.
  
 ### Example Extractions
  A few example extractions can be found in the folder `Extractions`.
-- Some extractions have been made on compatibility issues, and the results aggregated in a dynamic table (called "Looms", since provided by the **Data Loom** Plugin): [[compatibility challenges (Aggregation).loom]]
+- Some extractions have been made on compatibility issues, and the results aggregated in a dynamic table (called "Looms", since provided by the **DataLoom** Plugin): [[compatibility challenges (Aggregation).loom]]
 - There is also an [[Example Search for Co-occurrent Extraction Dimensions]], extractions where two dimensions have a specific value.
 
 ## Using this vault for your own research
