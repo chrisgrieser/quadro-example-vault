@@ -1,7 +1,9 @@
 ---
-description: "practices and issues related to dealing with the app store"
+description: practices and issues related to dealing with the app store
+related code: ["[[WebApps]]"]
 ---
 
+## App Store
 ---
 
 ![[Data/Mock Interview B (Android developer)#^id-903203]]
