@@ -1,5 +1,0 @@
-{
-  "openAiApiKey": "",
-  "maxTokens": 4000,
-  "defaultPrompt": "Summarize the following article(s) in 2-3 paragraphs."
-}

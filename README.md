@@ -19,9 +19,7 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 3. Open the directory `quadro-example-vault` as an Obsidian vault. ([If you are new to Obsidian, see the Obsidian Documentation on how to do that.](https://help.obsidian.md/Getting+started/Create+a+vault#Open+existing+folder))
 
 ## Pre-Configured Plugin Setup
-- **Quadro** itself
-	- There are buttons to the far left for all Quadro commands. Briefly hover over them to see what each button does.
-	- Quadro is configured to be auto-updated via the **BRAT plugin**.
+- **Quadro** itself: There are buttons to the far left for all Quadro commands. Briefly hover over them to see what each button does.
 - **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
 - **Data Loom:** Analyze extractions in a dynamic spreadsheet, similar to Notion or Excel.
 - **Another Quick Switcher**
@@ -58,7 +56,6 @@ A few data files for demonstration purposes, all stored in the folder `Data`
 	- [[Verge Article A]]
 	- [[Verge Article B]]
 	- [[Verge Article C]]
-- The file [[AI-supported Summaries]] contains instructions for creating summaries with OpenAI and the **AI Summary** plugin.
 
 ### Example Codings
 A few example codes can be found in the folder `Codes`.
