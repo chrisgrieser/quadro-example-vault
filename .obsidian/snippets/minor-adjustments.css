@@ -1,7 +1,6 @@
 /* FIX hide ribbon icon, since irritating for new users, and vaults
 * does not remember the setting when hiding it. */
-.side-dock-ribbon-action[aria-label="Create loom"],
-.side-dock-ribbon-action[aria-label="BRAT"] {
+.side-dock-ribbon-action[aria-label="Create loom"] {
 	display: none;
 }
 
