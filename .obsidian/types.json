@@ -8,6 +8,7 @@
     "OS": "multitext",
     "download date": "date",
     "extraction date": "datetime",
-    "extraction source": "text"
+    "extraction source": "text",
+    "code description": "text"
   }
 }
