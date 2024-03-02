@@ -1,6 +1,7 @@
 ---
-description: issues related to the app not being compatible anymore with the OS
-related code: ["[[WebApps]]"]
+code description: issues related to the app not being compatible anymore with the OS
+related code:
+  - "[[WebApps]]"
 ---
 
 # Compatibility

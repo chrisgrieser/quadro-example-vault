@@ -1,6 +1,7 @@
 ---
-description: practices and issues related to dealing with the app store
-related code: ["[[WebApps]]"]
+code description: practices and issues related to dealing with the app store
+related code:
+  - "[[WebApps]]"
 ---
 
 ## App Store

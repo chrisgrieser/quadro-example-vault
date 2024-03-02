@@ -1,6 +1,8 @@
 ---
-description: Progressive Web Apps (PWA)
-related code: ["[[Compatibility]]", "[[app store]]"]
+code description: Progressive Web Apps (PWA)
+related code:
+  - "[[Compatibility]]"
+  - "[[app store]]"
 ---
 
 # WebApps
