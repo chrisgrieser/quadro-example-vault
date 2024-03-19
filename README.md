@@ -11,7 +11,7 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	* [[#Example Codings]]
 	* [[#Example Extractions]]
 - [[#Using this vault for your own research]]
-	* [[#Download Webpages]]
+* [[#Download Webpages]]
 
 ## Installing this Vault
 1. Make sure your Obsidian version is at least 1.5.8.
@@ -32,6 +32,7 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- right-click to rename dimensions globally
 	- Access via Command Palette or the "Box" Icon at the top left.
 - **Multi-Properties:** In the file explorer, select multiple notes and click them to add/remove multiple properties at once.
+- **Semantic Canvas**: Visually explore and change relationships between files (reflected as metadata). Ideal for Axial Coding.
 - **Ollama:** Integrates Ollama, a *locally running* AI. Can be used to summarize documents.
 	- As a local AI model, no data leaves the machine, making it satisfying the privacy requirements of social research.
 	- Requires the having installed the [Ollama App](https://ollama.com/).
@@ -62,7 +63,7 @@ A few example codes can be found in the folder `Codes`.
 - The data was coded for [[app store]], [[WebApps]], and [[Compatibility]] issues.
 - An illustrative [[Example Code Co-occurrence]] has been done for [[app store]] and [[WebApps]]
 - You can click at the Graph Button in the left sidebar (or `ctrl+g`/ `cmd+g`) to open the Graph View. It has been configured to display only Data Files and Code Files.
-- Using the **Canvas** Plugin, relationship between entities can be explored. Here, it is used as an [[Axial Coding Example.canvas|Example for Axial Coding]].
+- Using the **Canvas** Plugin and the **Semantic Canvas** Plugin, relationships between codes can be explored. Here, it is used as an [[Axial Coding Example.canvas|Example for Axial Coding]].
  
 ### Example Extractions
  A few example extractions can be found in the folder `Extractions`.
@@ -75,7 +76,7 @@ If you want to use this vault for your own project, you can just delete the cont
 > [!TIP]
 > You might want to rename this vault, so it is not titled `quadro-example-vault` anymore. To do so, click the small vault icon at the bottom left, close this window, right-click `quadro-example-vault` and select `Rename Vault…`. After that, double-click your newly named vault to re-open it.
 
-### Download Webpages
+## Download Webpages
 To directly download webpages into your this vault, you need the [MarkDownload](https://chrome.google.com/webstore/detail/pcmpcfapbekmbjjkdalcgopdkipoggdi) Browser extension. In the settings for MarkDownload, you need to enable Obsidian integration, and the name of this vault, and you are all set. (The *Advanced URI Plugin*, which is also required by *MarkDownload*, is already pre-installed in this example vault.)
 
 You can also import the example settings used to download the *Verge* articles found in this vault: [MarkDownload example settings](./Extras/MarkDownload-example-settings.json). (Just remember to change the vault name in the settings, if you change the name of this vault.)

@@ -5,10 +5,6 @@ related code:
   - "[[app store]]"
 ---
 
-# WebApps
-
-
----
 
 ![[Data/Verge Article B#^id-258278]]
 ![[Data/Verge Article B#^id-908889]]

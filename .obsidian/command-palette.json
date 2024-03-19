@@ -7,6 +7,8 @@
     "properties:open",
     "ollama:summarize-selection",
     "canvas:export-as-image",
+    "semantic-canvas:create-canvas-from-note",
+    "semantic-canvas:set-canvas-to-note-properties",
     "workspace:export-pdf",
     "file-recovery:open",
     "quadro:assign-code",

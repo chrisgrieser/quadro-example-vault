@@ -1,0 +1,12 @@
+{
+  "newFileLocation": 2,
+  "customFileLocation": "Analysis",
+  "cardDefault": "cards",
+  "fileDefault": "files",
+  "urlDefault": "urls",
+  "groupDefault": "groups",
+  "useCards": true,
+  "useUrls": true,
+  "useFiles": true,
+  "useGroups": false
+}

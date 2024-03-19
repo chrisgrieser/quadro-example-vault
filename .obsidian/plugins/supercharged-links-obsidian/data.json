@@ -57,6 +57,18 @@
       "selectAppend": false,
       "selectPrepend": true,
       "selectBackground": false
+    },
+    {
+      "type": "path",
+      "name": "",
+      "value": ".canvas",
+      "matchCaseSensitive": false,
+      "match": "endswith",
+      "uid": "363c-2c44",
+      "selectText": true,
+      "selectAppend": false,
+      "selectPrepend": false,
+      "selectBackground": false
     }
   ]
 }

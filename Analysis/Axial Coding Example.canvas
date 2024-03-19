@@ -1,14 +1,12 @@
 {
 	"nodes":[
-		{"id":"578aaa81a4530e43","type":"text","text":"[[WebApps]]","x":-720,"y":-20,"width":140,"height":60},
-		{"id":"7500158380b4b114","type":"text","text":"In this canvas, we created new **cards with a link to a Code File** , added by typing `[[WebApps]]`.\n\nAs an alternative, we can also drag a **Code File itself**, as done with the `app store` file. It lets us see the *content* of the note itself, in which we can freely scroll, but it also requires more spaces.\n\nCards, Files, and relationships work via Drag'n'Drop.\n\n","x":-735,"y":-320,"width":465,"height":260,"color":"5"},
-		{"id":"2f1cf6eec941b698","x":-1300,"y":0,"width":300,"height":320,"type":"file","file":"Codes/fragmentation.md"},
-		{"id":"8bf0850f0e05f8c0","type":"file","file":"Codes/app store.md","x":-160,"y":-30,"width":360,"height":560},
-		{"id":"31d9bd60b61c9e72","type":"text","text":"[[Compatibility]]","x":-820,"y":220,"width":170,"height":60}
+		{"type":"group","id":"2","x":600,"y":0,"width":950,"height":500,"label":"related code"},
+		{"id":"3","type":"file","file":"Codes/Compatibility.md","x":650,"y":50,"width":400,"height":400},
+		{"id":"4","type":"file","file":"Codes/app store.md","x":1100,"y":50,"width":400,"height":400},
+		{"id":"0","type":"file","file":"Codes/WebApps.md","x":-120,"y":50,"width":400,"height":400,"color":"1"},
+		{"id":"c6837b3973d9bd56","type":"text","text":"# INFO\nThis canvas was created with the [Semantic Canvas Plugin](https://github.com/aarongilly/obsidian-semantic-canvas-plugin), with the command `Semantic Canvas: Create canvas based on note`, using [[WebApps]] as the starting point.\n\nThe `related code` container was automatically inserted into this canvas. Using the command `Semantic Canvas: Overwrite note properties based on canvas` will update the metadata of [[WebApps]] with the changes made.\n\nUsing this plugin, we can visually add or remove connections between codes. Example to try out:\n1. Drag a Code File (or any other file) from the bar at the bottom. A representation of the file will appear on the canvas.\n2. Enlarge the the container for `related code`, and move the Code File into that container.\n3. Run the command `Semantic Canvas: Overwrite note properties based on canvas` via the command palette (`ctrl/cmd + p`). \n4. Now open the Code File for [[WebApps]]. The metadata for `related codes`, which previously only contained 2 other codes, will now contain three 3 codes, reflecting the change just made\n\nRefer to the documentation of the [Canvas Plugin](https://help.obsidian.md/Plugins/Canvas), and the [documentation of the Semantic Canvas Plugin](https://github.com/aarongilly/obsidian-semantic-canvas-plugin?tab=readme-ov-file#obsidian-semantic-canvas-plugin) for more information what you can do.","x":-120,"y":-600,"width":1050,"height":480,"color":"5"}
 	],
 	"edges":[
-		{"id":"222fa3bf8b9c4bb7","fromNode":"31d9bd60b61c9e72","fromSide":"top","toNode":"578aaa81a4530e43","toSide":"bottom","color":"1","label":"works on both operating system"},
-		{"id":"13ba6a0c325f052c","fromNode":"578aaa81a4530e43","fromSide":"right","toNode":"8bf0850f0e05f8c0","toSide":"left","fromEnd":"arrow","label":"alternatives"},
-		{"id":"36b1487c617cf3c2","fromNode":"2f1cf6eec941b698","fromSide":"right","toNode":"31d9bd60b61c9e72","toSide":"left","toEnd":"none"}
+		{"id":"1","fromNode":"0","fromSide":"right","toNode":"2","toSide":"left","label":"related code"}
 	]
 }
