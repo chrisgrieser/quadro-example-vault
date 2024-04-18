@@ -1,5 +1,5 @@
 ---
-datatype: online-article
+data-type: online-article
 publication: www.theverge.com
 author: Emma Roth
 keywords:
@@ -8,7 +8,7 @@ keywords:
   - App Store
 abstract: Fortnite is coming back to iOS soon.
 url: https://www.theverge.com/2024/2/16/24074873/epic-apple-ios-developer-account-eu-games-store-fortnite
-download date: 2024-02-20
+download-date: 2024-02-20
 ---
 ## Epic Games is planning to launch a digital storefront — and Fortnite — on iOS this year.
 

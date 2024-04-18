@@ -1,5 +1,5 @@
 ---
-datatype: online-article
+data-type: online-article
 publication: www.theverge.com
 author: Emma Roth
 keywords:
@@ -8,7 +8,7 @@ keywords:
   - WebApp
 abstract: It might be a feature, not a bug.
 url: https://www.theverge.com/2024/2/14/24072764/apple-progressive-web-apps-eu-ios-17-4
-download date: 2024-02-20
+download-date: 2024-02-20
 ---
 ## As Apple prepares to comply with the Digital Markets Act, the company seems to be disabling an alternate way of installing services to the iPhone’s homescreen.
 
