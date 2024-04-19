@@ -22,5 +22,14 @@
       ],
       "key": "E"
     }
+  ],
+  "slurp:create-note-from-url": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "S"
+    }
   ]
 }

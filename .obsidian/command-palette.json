@@ -3,6 +3,7 @@
     "obsidian-another-quick-switcher:search-command_search-code-files",
     "obsidian-another-quick-switcher:search-command_search-data-files",
     "obsidian-another-quick-switcher:search-command_search-extraction-files",
+    "slurp:create-note-from-url",
     "canvas:new-file",
     "properties:open",
     "ollama:summarize-selection",

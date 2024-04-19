@@ -1,6 +1,5 @@
 [
   "obsidian-dynamic-highlights",
-  "obsidian-advanced-uri",
   "obsidian-another-quick-switcher",
   "quadro",
   "supercharged-links-obsidian",
@@ -9,5 +8,6 @@
   "obsidian-hover-editor",
   "multi-properties",
   "ollama",
-  "semantic-canvas"
+  "semantic-canvas",
+  "slurp"
 ]

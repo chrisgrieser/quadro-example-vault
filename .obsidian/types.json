@@ -8,7 +8,7 @@
     "OS": "multitext",
     "code description": "text",
     "extraction-date": "datetime",
-    "extraction-source": "text",
+    "extraction-source": "multitext",
     "download-date": "date",
     "extraction date": "datetime"
   }

@@ -1,0 +1,114 @@
+{
+  "settingsVersion": 1,
+  "fm": {
+    "includeEmpty": true,
+    "tags": {
+      "parse": false,
+      "prefix": "slurp",
+      "case": "iKebab-case"
+    },
+    "properties": {
+      "link": {
+        "id": "link",
+        "key": "url",
+        "idx": 6,
+        "enabled": true,
+        "custom": false
+      },
+      "byline": {
+        "id": "byline",
+        "key": "author",
+        "idx": 1,
+        "enabled": true,
+        "custom": false
+      },
+      "siteName": {
+        "id": "siteName",
+        "key": "site",
+        "idx": 2,
+        "enabled": true,
+        "custom": false
+      },
+      "publishedTime": {
+        "id": "publishedTime",
+        "key": "year",
+        "idx": 4,
+        "format": "d|YYYY",
+        "enabled": true,
+        "custom": false
+      },
+      "modifiedTime": {
+        "id": "modifiedTime",
+        "key": "updated",
+        "idx": 8,
+        "format": "d|YYYY-MM-DDTHH:mm",
+        "enabled": false,
+        "custom": false
+      },
+      "type": {
+        "id": "type",
+        "key": "data-type",
+        "idx": 5,
+        "enabled": true,
+        "custom": false
+      },
+      "excerpt": {
+        "id": "excerpt",
+        "key": "abstract",
+        "idx": 3,
+        "enabled": true,
+        "custom": false
+      },
+      "twitter": {
+        "id": "twitter",
+        "key": "twitter",
+        "idx": 9,
+        "format": "s|https://twitter.com/{s}",
+        "enabled": false,
+        "custom": false
+      },
+      "tags": {
+        "id": "tags",
+        "key": "tags",
+        "idx": 10,
+        "format": "S|{prefix}/{tag}",
+        "enabled": false,
+        "custom": false
+      },
+      "onion": {
+        "id": "onion",
+        "key": "onion",
+        "idx": 11,
+        "enabled": false,
+        "custom": false
+      },
+      "slurped": {
+        "id": "slurped",
+        "key": "download-date",
+        "idx": 7,
+        "format": "d|YYYY-MM-DD",
+        "enabled": true,
+        "custom": false
+      },
+      "title": {
+        "id": "title",
+        "key": "title",
+        "idx": 0,
+        "enabled": true,
+        "custom": false
+      },
+      "le8rp": {
+        "id": "le8rp",
+        "key": "read",
+        "idx": 8,
+        "format": "b|false",
+        "enabled": true,
+        "custom": true
+      }
+    }
+  },
+  "logs": {
+    "logPath": "_slurplogs",
+    "debug": false
+  }
+}

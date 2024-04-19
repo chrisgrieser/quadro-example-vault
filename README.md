@@ -15,7 +15,7 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 
 ## Installing this Vault
 1. Make sure your Obsidian version is at least 1.5.8.
-2. [Download the vault](https://github.com/chrisgrieser/quadro-example-vault/releases/latest/download/quadro-example-vault.zip).
+2. [Download this vault](https://github.com/chrisgrieser/quadro-example-vault/releases/latest/download/quadro-example-vault.zip).
 3. Open the directory `quadro-example-vault` as an Obsidian vault. ([If you are new to Obsidian, see the Obsidian Documentation on how to do that.](https://help.obsidian.md/Getting+started/Create+a+vault#Open+existing+folder))
 
 ## Pre-Configured Plugin Setup
@@ -28,24 +28,24 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- Search for Data Files only via `alt+d`.
 - **Properties View
 	- View all properties ( = extraction dimensions) in the entire vault.
-	- left-click on them to search for them
-	- right-click to rename dimensions globally
+	- Left-click on them to search for them.
+	- Right-click to rename dimensions globally.
 	- Access via Command Palette or the "Box" Icon at the top left.
-- **Multi-Properties:** In the file explorer, select multiple notes and click them to add/remove multiple properties at once.
-- **Semantic Canvas**: Visually explore and change relationships between files (reflected as metadata). Ideal for Axial Coding.
-- **Ollama:** Integrates Ollama, a *locally running* AI. Can be used to summarize documents.
+- **Multi-Properties:** In the file explorer, select multiple notes and click them to ==add/remove multiple properties== at once.
+- **Semantic Canvas**: ==Visually explore and change relationships== between files (reflected as metadata). Ideal for Axial Coding.
+- **Ollama:** Integrates Ollama, ==a locally running AI==. Can be used to summarize documents.
 	- As a local AI model, no data leaves the machine, making it satisfying the privacy requirements of social research.
 	- Requires the having installed the [Ollama App](https://ollama.com/).
-- **Dynamic Highlights**: Highlight specific words throughout the vault. Useful to highlight keywords in the data. 
+- **Dynamic Highlights**: ==Highlight specific words== throughout the vault. Useful to highlight keywords in the data. 
 	- In this example vault, the words "iOS" and "Android" are highlighted (as you can see here).
-- **Supercharged Links:** Visually distinguish links to different sorts of files:
+- **Supercharged Links:** ==Visually distinguish links== to different sorts of files:
 	- Example link to a Code File (yellow): [[Compatibility]]
 	- Example link to a Extraction File (green): [[app store problem 1]]
 	- Example link to a Data File (document emoji): [[Verge Article A]]
 	- The plugin also allows you to color different individual codes or extraction types differently. The types of linkes are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin, in their respective settings menu.
 - **Hover Editor:** Hold `cmd` (macOS) or `ctrl` (Windows) and hover the mouse over a link to open a popup of the linked file, which you can modify.
-- **File Recovery**: Configured to automatically create versioned backups of any file every 5 minutes. Accessible via the **Command Palette**.
-
+- **Slurp**: Use `cmd+shift+s` (macOS) or `ctrl+shift+s` (Windows) to ==download webpages== as markdown files with metadata directly into this vault.
+- **File Recovery**: Configured to automatically create versioned ==backups of any file every 5 minutes==. Accessible via the **Command Palette**.
 
 ## Demonstration of QDA with Quadro
 ### Example Data
@@ -76,7 +76,3 @@ If you want to use this vault for your own project, you can just delete the cont
 > [!TIP]
 > You might want to rename this vault, so it is not titled `quadro-example-vault` anymore. To do so, click the small vault icon at the bottom left, close this window, right-click `quadro-example-vault` and select `Rename Vault…`. After that, double-click your newly named vault to re-open it.
 
-## Download Webpages
-To directly download webpages into your this vault, you need the [MarkDownload](https://chrome.google.com/webstore/detail/pcmpcfapbekmbjjkdalcgopdkipoggdi) Browser extension. In the settings for MarkDownload, you need to enable Obsidian integration, and the name of this vault, and you are all set. (The *Advanced URI Plugin*, which is also required by *MarkDownload*, is already pre-installed in this example vault.)
-
-You can also import the example settings used to download the *Verge* articles found in this vault: [MarkDownload example settings](./Extras/MarkDownload-example-settings.json). (Just remember to change the vault name in the settings, if you change the name of this vault.)
