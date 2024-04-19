@@ -6,6 +6,12 @@ on:
 
 env:
   REPO_NAME: ${{ github.event.repository.name }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions:
+  contents: write
+
+#───────────────────────────────────────────────────────────────────────────────
 
 jobs:
   build:
