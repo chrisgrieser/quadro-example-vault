@@ -21,7 +21,7 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 ## Pre-Configured Plugin Setup
 - **Quadro** itself: There are buttons to the far left for all Quadro commands. Briefly hover over them to see what each button does.
 - **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): includes a list of all relevant commands for QDA at the top. 
-- **Data Loom:** Analyze extractions in a dynamic spreadsheet, similar to Notion or Excel.
+- **Projects:** Analyze extractions in a dynamic spreadsheet, similar to Notion or Excel.
 - **Another Quick Switcher**
 	- Search for Code Files only via `alt+c`.
 	- Search for Extraction Files only via `alt+e`.
@@ -67,7 +67,7 @@ A few example codes can be found in the folder `Codes`.
  
 ### Example Extractions
  A few example extractions can be found in the folder `Extractions`.
-- Some extractions have been made on compatibility issues, and the results aggregated in a dynamic table (called "Looms", since provided by the **DataLoom** Plugin): [[compatibility challenges (Aggregation).loom]]
+- Some extractions have been made on compatibility issues, and the results aggregated in a spreadsheet. To view that table,  use **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): and search/select "Projects: Show projects".
 - There is also an [[Example Search for Co-occurrent Extraction Dimensions]], extractions where two dimensions have a specific value.
 
 ## Using this vault for your own research

@@ -12,6 +12,7 @@
     "semantic-canvas:set-canvas-to-note-properties",
     "workspace:export-pdf",
     "file-recovery:open",
+    "obsidian-projects:show-projects",
     "quadro:assign-code",
     "quadro:unassign-code",
     "quadro:delete-code-everywhere",
@@ -19,7 +20,6 @@
     "quadro:bulk-create-new-code-files",
     "quadro:extract-from-paragraph",
     "quadro:create-new-extraction-type",
-    "quadro:aggregate-extractions",
     "quadro:export-all-extractions-as-csv"
   ]
 }

@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "projects": [
+    {
+      "fieldConfig": {},
+      "defaultName": "",
+      "templates": [],
+      "excludedNotes": [],
+      "isDefault": false,
+      "dataSource": {
+        "kind": "folder",
+        "config": {
+          "path": "Extractions/compatibility challenges",
+          "recursive": false
+        }
+      },
+      "newNotesFolder": "",
+      "views": [
+        {
+          "config": {},
+          "filter": {
+            "conjunction": "and",
+            "conditions": [
+              {
+                "field": "name",
+                "operator": "is-not",
+                "enabled": true,
+                "value": "[[Template]]"
+              }
+            ]
+          },
+          "colors": {
+            "conditions": []
+          },
+          "sort": {
+            "criteria": []
+          },
+          "id": "6f305217-f8fb-43ee-ab5f-8489d59208c5",
+          "name": "Table",
+          "type": "table"
+        }
+      ],
+      "id": "32f173c3-5fee-4540-8ea0-890f93b8aced",
+      "name": "compatibility challenges"
+    }
+  ],
+  "archives": [],
+  "preferences": {
+    "projectSizeLimit": 1000,
+    "frontmatter": {
+      "quoteStrings": "PLAIN"
+    },
+    "commands": [],
+    "linkBehavior": "open-editor"
+  }
+}

@@ -5810,7 +5810,7 @@ __export(main_exports, {
   default: () => SlurpPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian6 = require("obsidian");
+var import_obsidian10 = require("obsidian");
 
 // node_modules/yaml/browser/dist/nodes/identity.js
 var ALIAS = Symbol.for("yaml.alias");
@@ -9041,70 +9041,21 @@ function stringify3(value, replacer, options) {
   return new Document(value, _replacer, options).toString(options);
 }
 
-// src/formatters.ts
-var import_moment = __toESM(require_moment());
-var format = (tmpl, val) => {
-  switch (tmpl.substring(0, 2)) {
-    case "b|":
-      return formatBoolean(tmpl.substring(2), val);
-    case "d|":
-      return formatDate(tmpl.substring(2), val);
-    case "s|":
-      return formatString(tmpl.substring(2), val);
-    case "S|":
-      return formatStrings(tmpl.substring(2), val);
-    default:
-      return formatString(tmpl, val);
-  }
-};
-var formatBoolean = (tmpl, val) => {
-  if (tmpl !== "" && !val)
-    return JSON.parse(tmpl.toLowerCase());
-  if (typeof val === "string" && ["true", "false"].contains(val.trim().toLowerCase()))
-    return JSON.parse(val);
-  if (typeof val === "boolean")
-    return val;
-  console.warn(`Unable to parse ${val} as a boolean, passing it back raw.`);
-  return val;
-};
-var formatDate = (t = "YYYY-MM-DDTHH:mm", v = new Date()) => {
-  const result = (0, import_moment.default)(v).format(t);
-  return isNaN(+result) ? result : +result;
-};
-var formatString = (tmpl, val) => formatStrings(tmpl, [{ s: val }])[0];
-var formatStrings = (tmpl, val) => {
-  const result = new Array();
-  for (let i of val) {
-    const s = tmpl.replace(/\{(\w+)\}/g, (match, name) => {
-      return i.hasOwnProperty(name) ? i[name] : match;
-    });
-    result.push(s);
-  }
-  return result;
-};
-
-// src/logger.ts
+// src/lib/formatters.ts
 var import_moment2 = __toESM(require_moment());
-var import_obsidian2 = require("obsidian");
 
-// src/util.ts
+// src/lib/logger.ts
+var import_moment = __toESM(require_moment());
 var import_obsidian = require("obsidian");
+
+// src/lib/util.ts
 var isEmpty = (val) => {
-  return val == null || typeof val === "string" && val.trim().length == 0 || typeof val[Symbol.iterator] === "function" && val.length === 0;
+  return val == null || typeof val === "string" && val.trim().length === 0 || typeof val[Symbol.iterator] === "function" && val.length === 0;
 };
-var createFilePath = async (vault, title, path = DEFAULT_PATH) => {
-  const fpLoop = (p, fn, retries) => {
-    if (retries == 100)
-      throw "Cowardly refusing to increment past 100.";
-    const suffix = retries > 0 ? `-${retries}.md` : ".md";
-    const fp = (0, import_obsidian.normalizePath)(`${p}/${fn}${suffix}`);
-    return vault.getFileByPath(fp) ? fpLoop(p, fn, retries + 1) : fp;
-  };
-  const folder = vault.getFolderByPath(path) || await vault.createFolder(path);
-  const fileName = title.replace(/[\\\/:]/g, "-");
-  return fpLoop(folder.path, fileName, 0);
+var removeTrailingSlash = (str) => str.endsWith("/") ? str.substring(0, str.length - 1) : str;
+var cleanTitle = (title) => {
+  return title.replace(/\s?[\|:]\s?/g, " - ").replace('"', "'").replace(/[\*"\\/<>:\?]/g, "");
 };
-var sortFrontMatterItems = (items) => items.sort((a, b) => a.idx - b.idx);
 var updateStringCase = (text2, targetCase) => {
   switch (targetCase) {
     case "PascalCase":
@@ -9132,9 +9083,63 @@ var serialize = (val) => {
     return Array.from(val);
   return val;
 };
+var murmurhash3_32 = (key, seed = 0) => {
+  var remainder, bytes, h1, h1b, c1, c2, k1, i;
+  remainder = key.length & 3;
+  bytes = key.length - remainder;
+  h1 = seed;
+  c1 = 3432918353;
+  c2 = 461845907;
+  i = 0;
+  while (i < bytes) {
+    k1 = key.charCodeAt(i) & 255 | (key.charCodeAt(++i) & 255) << 8 | (key.charCodeAt(++i) & 255) << 16 | (key.charCodeAt(++i) & 255) << 24;
+    ++i;
+    k1 = (k1 & 65535) * c1 + (((k1 >>> 16) * c1 & 65535) << 16) & 4294967295;
+    k1 = k1 << 15 | k1 >>> 17;
+    k1 = (k1 & 65535) * c2 + (((k1 >>> 16) * c2 & 65535) << 16) & 4294967295;
+    h1 ^= k1;
+    h1 = h1 << 13 | h1 >>> 19;
+    h1b = (h1 & 65535) * 5 + (((h1 >>> 16) * 5 & 65535) << 16) & 4294967295;
+    h1 = (h1b & 65535) + 27492 + (((h1b >>> 16) + 58964 & 65535) << 16);
+  }
+  k1 = 0;
+  switch (remainder) {
+    case 3:
+      k1 ^= (key.charCodeAt(i + 2) & 255) << 16;
+    case 2:
+      k1 ^= (key.charCodeAt(i + 1) & 255) << 8;
+    case 1:
+      k1 ^= key.charCodeAt(i) & 255;
+      k1 = (k1 & 65535) * c1 + (((k1 >>> 16) * c1 & 65535) << 16) & 4294967295;
+      k1 = k1 << 15 | k1 >>> 17;
+      k1 = (k1 & 65535) * c2 + (((k1 >>> 16) * c2 & 65535) << 16) & 4294967295;
+      h1 ^= k1;
+  }
+  h1 ^= key.length;
+  h1 ^= h1 >>> 16;
+  h1 = (h1 & 65535) * 2246822507 + (((h1 >>> 16) * 2246822507 & 65535) << 16) & 4294967295;
+  h1 ^= h1 >>> 13;
+  h1 = (h1 & 65535) * 3266489909 + (((h1 >>> 16) * 3266489909 & 65535) << 16) & 4294967295;
+  h1 ^= h1 >>> 16;
+  return h1 >>> 0;
+};
+var extractDomain = (u) => {
+  const url = u.split(":").length == 1 ? `https://${u}` : u;
+  try {
+    const urlObj = new URL(url);
+    if (urlObj.protocol === "http:" || urlObj.protocol === "https:") {
+      const parts = urlObj.host.split(".");
+      const domain = parts[parts.length - 2] + "." + parts[parts.length - 1];
+      if (!domain.startsWith(".") && !domain.endsWith("."))
+        return domain;
+    }
+  } catch (err) {
+  }
+  return null;
+};
 
-// src/logger.ts
-var MAX_BUFFER_SIZE = 10 ^ 5;
+// src/lib/logger.ts
+var MAX_BUFFER_SIZE = 100;
 var _logger;
 var staticLog = (msg) => {
   const msgStr = `[${msg.caller}] ${msg.msg}`;
@@ -9161,34 +9166,34 @@ var logger = () => _logger || {
 var Logger = class {
   constructor(plugin) {
     this.buffer = new Array();
+    this.sortBuffer = () => this.buffer.sort((a, b) => a.timestamp - b.timestamp);
     this.bufferLog = (msg) => {
-      this.buffer.sort((a, b) => a.timestamp - b.timestamp);
+      this.sortBuffer();
       if (this.buffer.length >= MAX_BUFFER_SIZE)
-        this.buffer.pop();
+        this.buffer.shift();
       this.buffer.push(msg);
     };
     this.getOrCreateLogFile = async () => {
       const folder = this.vault.getFolderByPath(this.settings.logPath) || await this.vault.createFolder(this.settings.logPath);
-      const file = (0, import_obsidian2.normalizePath)(`${folder.path}/slurp-${(0, import_moment2.default)().format("YYYY-MM-DD")}.md`);
+      const file = (0, import_obsidian.normalizePath)(`${folder.path}/slurp-${(0, import_moment.default)().format("YYYY-MM-DD")}.md`);
       return this.vault.getFileByPath(file) || await this.vault.create(file, `##### startup: ${new Date().toUTCString()}
 `);
     };
-    this.flush = async () => {
-      if (this.buffer.length == 0)
-        return;
-      const file = await this.getOrCreateLogFile();
-      if (this.settings.debug)
-        console.log(`flushing logs`, this.buffer, file);
-      const b = new Set(this.buffer);
+    this.dump = (returnCallback = true, limit = Number.POSITIVE_INFINITY, format2 = "markdown") => {
       let content = "\n";
-      b.forEach((msg) => {
-        let optJson = [];
-        for (let i of msg.optionalParams || []) {
-          optJson.push(JSON.stringify(serialize(i), void 0, 2));
+      const b = new Set(this.sortBuffer());
+      for (let idx = 0; idx < this.buffer.length && idx < limit; idx++) {
+        const msg = this.buffer[idx];
+        const optJson = [];
+        for (const i of msg.optionalParams || []) {
+          try {
+            optJson.push(JSON.stringify(serialize(i), void 0, 2));
+          } catch (err) {
+            optJson.push(`Unable to stringify: ${i}`);
+          }
         }
-        content += `##### [${msg.level.padStart(5)}] ${msg.msg}
-> \`${msg.caller}\`
-> ${msg.timestamp}
+        content += `##### ${msg.timestamp} | ${msg.level.padStart(5).toUpperCase()} | ${msg.msg}
+- Caller: \`${msg.caller}\`
 
 `;
         if (optJson.length > 0)
@@ -9197,18 +9202,29 @@ ${optJson.join("\n")}
 \`\`\`
 
 `;
-      });
+      }
+      ;
+      return {
+        content,
+        onComplete: returnCallback ? () => b.forEach((msg) => this.buffer.remove(msg)) : null
+      };
+    };
+    this.flush = async () => {
+      if (this.buffer.length === 0 || !this.settings.debug)
+        return;
+      const file = await this.getOrCreateLogFile();
+      console.log("flushing logs", this.buffer, file);
+      const { content, onComplete } = this.dump();
       await this.vault.append(file, content);
-      b.forEach((msg) => this.buffer.remove(msg));
+      if (onComplete)
+        onComplete();
     };
     this.log = (msg) => {
-      if (!this.settings.debug && msg.level == "debug")
-        return;
       const msgStr = `[${msg.caller}] ${msg.msg}`;
       const fn = msg.level === "error" ? console.error : msg.level === "warn" ? console.warn : console.log;
-      fn(msgStr, ...msg.optionalParams || []);
-      if (this.settings.debug)
-        this.bufferLog(msg);
+      if (this.settings.debug || msg.level !== "debug")
+        fn(msgStr, ...msg.optionalParams || []);
+      this.bufferLog(msg);
     };
     this.debug = (msg, ...optionalParams) => {
       var _a, _b;
@@ -9228,8 +9244,9 @@ ${optJson.join("\n")}
     this.vault = plugin.app.vault;
     if (plugin.settings && Object.keys(plugin.settings).contains("logs")) {
       this.settings = plugin.settings.logs;
-    } else
+    } else {
       this.settings = { debug: true, logPath: DEFAULT_SETTINGS.logs.logPath };
+    }
     if (this.settings.debug)
       plugin.registerInterval(window.setInterval(
         () => this.flush(),
@@ -9237,6 +9254,53 @@ ${optJson.join("\n")}
       ));
     _logger = this;
   }
+};
+
+// src/lib/formatters.ts
+var format = (tmpl, val) => {
+  switch (tmpl.substring(0, 2)) {
+    case "b|":
+      return formatBoolean(tmpl.substring(2), val);
+    case "d|":
+      return formatDate(tmpl.substring(2), val);
+    case "s|":
+      return formatString(tmpl.substring(2), val);
+    case "S|":
+      return formatStrings(tmpl.substring(2), val);
+    default:
+      return formatString(tmpl, val);
+  }
+};
+var formatBoolean = (tmpl, val) => {
+  if (tmpl !== "" && !val)
+    return JSON.parse(tmpl.toLowerCase());
+  if (typeof val === "string" && ["true", "false"].contains(val.trim().toLowerCase()))
+    return JSON.parse(val);
+  if (typeof val === "boolean")
+    return val;
+  console.warn(`Unable to parse ${val} as a boolean, passing it back raw.`);
+  return val;
+};
+var formatDate = (t = "YYYY-MM-DDTHH:mm", v = new Date()) => {
+  const result = (0, import_moment2.default)(v).format(t);
+  return Number.isNaN(+result) ? result : +result;
+};
+var formatString = (tmpl, val) => val ? formatStrings(tmpl, [{ s: val }])[0] : "";
+var formatStrings = (tmpl, val) => {
+  const result = new Array();
+  for (const i of val) {
+    logger().debug("formatting string", { tmpl, value: i });
+    result.push(
+      tmpl.replace(
+        /\{(\w+)\}/g,
+        (match, name) => {
+          logger().debug("match found", { match, name, value: i[name], iHasName: i.hasOwnProperty(name) });
+          return !i.hasOwnProperty(name) ? match : i[name] !== void 0 ? i[name] : "";
+        }
+      )
+    );
+  }
+  return result;
 };
 
 // src/frontmatter.ts
@@ -9296,7 +9360,7 @@ var FrontMatterProp = class {
     };
     var _a;
     if (!d && !s)
-      throw Error("FrontMatterItem objects require either a setting or a default");
+      throw Error("FrontMatterProp objects require either a setting or a default");
     this._key = s == null ? void 0 : s.key;
     this._idx = s == null ? void 0 : s.idx;
     this._format = s == null ? void 0 : s.format;
@@ -9317,7 +9381,7 @@ var FrontMatterProp = class {
     this._key = val;
   }
   get idx() {
-    return this._idx !== void 0 ? this._idx : this.defaultIdx !== void 0 ? this.defaultIdx : Infinity;
+    return this._idx !== void 0 ? this._idx : this.defaultIdx !== void 0 ? this.defaultIdx : Number.POSITIVE_INFINITY;
   }
   set idx(val) {
     this._idx = val;
@@ -9365,16 +9429,21 @@ var getFrontMatterYaml = (fm, idx) => {
 var createFrontMatter = (article, fmItems, showEmpty) => {
   const fm = /* @__PURE__ */ new Map();
   const keyIndex = /* @__PURE__ */ new Map();
-  fmItems.forEach((v) => {
+  for (const [k, v] of fmItems) {
     if (v.enabled) {
       fm.set(v.key, getFrontMatterValue(v, article, showEmpty));
       keyIndex.set(v.key, v.idx);
     }
-  });
+  }
   return getFrontMatterYaml(fm, keyIndex);
 };
+var sortFrontMatterItems = (items) => items.sort((a, b) => a.idx - b.idx);
 
 // src/const.ts
+var KNOWN_BROKEN_DOMAINS = /* @__PURE__ */ new Map([
+  ["fastcompany.com", "Fast Company prevents programs like Slurp from accessing their articles."],
+  ["sparksoftcorp.com", null]
+]);
 var FRONT_MATTER_ITEM_DEFAULTS = new Map([
   {
     id: "link",
@@ -9469,6 +9538,7 @@ var FRONT_MATTER_ITEM_DEFAULTS = new Map([
 var FRONT_MATTER_ITEM_DEFAULT_SETTINGS = createFrontMatterPropSettings(createFrontMatterProps());
 var DEFAULT_SETTINGS = {
   settingsVersion: 1,
+  defaultPath: "Slurped Pages",
   fm: {
     includeEmpty: false,
     tags: {
@@ -9480,43 +9550,145 @@ var DEFAULT_SETTINGS = {
   },
   logs: { logPath: "_slurplogs", debug: false }
 };
-var DEFAULT_PATH = "Slurped Pages";
+
+// src/lib/files.ts
+var import_obsidian2 = require("obsidian");
+var ensureFolderExists = async (vault, path) => {
+  const existingFolder = vault.getFolderByPath((0, import_obsidian2.normalizePath)(path));
+  logger().debug(`getFolderByPath("${path}")`, existingFolder);
+  return existingFolder !== null ? existingFolder.path : path === "" ? "" : await (await vault.createFolder(path)).path;
+};
+var handleDuplicates = (vault, filename, retries, path) => {
+  if (retries === 100)
+    throw "Cowardly refusing to increment past 100.";
+  const suffix = retries > 0 ? ` (${retries}).md` : ".md";
+  const fullPath = path !== "" ? `${path}/${filename}${suffix}` : `${filename}${suffix}`;
+  const normPath = (0, import_obsidian2.normalizePath)(fullPath);
+  logger().debug(`checking if path is available: ${normPath}`);
+  return vault.getFileByPath(normPath) ? handleDuplicates(vault, filename, retries + 1, path) : normPath;
+};
+var getNewFilePath = async (vault, title, pathSetting) => {
+  const titleClean = cleanTitle(title);
+  logger().debug(`finalised title: ${title}`);
+  const path = await ensureFolderExists(vault, pathSetting);
+  logger().debug(`finalised folder: ${path}`);
+  return handleDuplicates(vault, titleClean, 0, path);
+};
 
 // src/modals/new-note.ts
+var import_obsidian5 = require("obsidian");
+
+// src/components/bouncing-progress-bar.ts
 var import_obsidian3 = require("obsidian");
-var SlurpNewNoteModal = class extends import_obsidian3.Modal {
+var BouncingProgressBarComponent = class extends import_obsidian3.ProgressBarComponent {
+  constructor(contentEl) {
+    super(contentEl);
+    this.timerId = -1;
+    this.setDisabled(true);
+    this.setValue(0);
+  }
+  update() {
+    const cur = this.getValue();
+    this.setValue(cur + (cur == 100 ? 1 : -1));
+  }
+  start() {
+    this.setDisabled(false);
+    this.timerId = window.setInterval(this.update, 10);
+  }
+  stop() {
+    if (this.timerId > 0)
+      window.clearInterval(this.timerId);
+  }
+};
+
+// src/components/validated-text.ts
+var import_obsidian4 = require("obsidian");
+var ValidatedTextComponent = class extends import_obsidian4.TextComponent {
+  constructor(containerEl) {
+    super(containerEl);
+    this._validators = /* @__PURE__ */ new Set();
+    this._errList = containerEl.createEl("ul");
+    this._errList.addClasses(["validation-error"]);
+    this._earlyReturn = true;
+    this._minLen = 3;
+    this._onValidateCb = () => {
+    };
+    this.onChange(() => this.validate());
+    containerEl.appendChild(this._errList);
+  }
+  setValidationErrorClass(className) {
+    this._errList.addClass(className);
+    return this;
+  }
+  setStopOnFirstError(val = true) {
+    this._earlyReturn = val;
+    return this;
+  }
+  setMinimumLength(val = 3) {
+    this._minLen = val;
+    return this;
+  }
+  addValidator(fn) {
+    this._validators.add(fn);
+    return this;
+  }
+  onValidate(fn) {
+    this._onValidateCb = fn;
+    return this;
+  }
+  validate() {
+    const input = this.getValue() || "";
+    const errs = [];
+    if (input.length >= this._minLen) {
+      for (const fn of this._validators) {
+        const err = fn(input);
+        if (err !== null)
+          errs.push(err);
+        if (errs.length > 0 && this._earlyReturn)
+          break;
+      }
+    }
+    this._errList.replaceChildren(...errs);
+    this._onValidateCb(input, errs);
+  }
+};
+
+// src/modals/new-note.ts
+var SlurpNewNoteModal = class extends import_obsidian5.Modal {
   constructor(app, plugin) {
     super(app);
+    this.WARNING_CLS = "validation";
+    this.URL_FORMAT_ERR = "Invalid URL format.";
     this.plugin = plugin;
-    this.url = "";
+  }
+  validateKnownBrokenDomains(url) {
+    const domain = extractDomain(url) || "";
+    const defaultReason = "This site is known to be incompatible with Slurp.";
+    return KNOWN_BROKEN_DOMAINS.has(domain) ? KNOWN_BROKEN_DOMAINS.get(domain) || defaultReason : null;
+  }
+  validateUrlFormat(url) {
+    return extractDomain(url) === null ? this.URL_FORMAT_ERR : null;
   }
   onOpen() {
     const { contentEl } = this;
-    contentEl.createEl("h3", { text: "What would you like to slurp today?" });
-    const urlField = new import_obsidian3.TextComponent(contentEl).setPlaceholder("URL").onChange((val) => this.url = val);
+    let slurpBtn;
+    new import_obsidian5.Setting(contentEl).setName("What would you like to slurp today?").setHeading();
+    const urlField = new ValidatedTextComponent(contentEl).setPlaceholder("https://www.somesite.com/...").setMinimumLength(5).addValidator((url) => this.validateUrlFormat(url)).addValidator((url) => this.validateKnownBrokenDomains(url)).onValidate((url, errs) => {
+      slurpBtn.setDisabled(errs.length > 0 || urlField.getValue().length < 5);
+    });
     urlField.inputEl.setCssProps({ "width": "100%" });
-    const progressBar = new import_obsidian3.ProgressBarComponent(contentEl);
-    progressBar.disabled = true;
-    progressBar.setValue(0);
-    const doSlurp = async () => {
-      urlField.setDisabled(true);
-      progressBar.setDisabled(false);
-      let progressIncrement = 1;
-      const t = setInterval(() => {
-        const cur = progressBar.getValue();
-        if (cur == 100)
-          progressIncrement *= -1;
-        progressBar.setValue(cur + progressIncrement);
-      }, 10);
-      try {
-        this.plugin.slurp(this.url);
-      } catch (err) {
-        this.plugin.displayError(err);
-      }
-      clearInterval(t);
+    const progressBar = new BouncingProgressBarComponent(contentEl);
+    const doSlurp = () => {
+      progressBar.start();
+      this.plugin.slurp(urlField.getValue());
+      progressBar.stop();
       this.close();
     };
-    new import_obsidian3.Setting(contentEl).addButton((btn) => btn.setButtonText("Slurp").setCta().onClick(doSlurp));
+    new import_obsidian5.Setting(contentEl).addButton((btn) => {
+      btn.setButtonText("Slurp").setCta().setDisabled(true).onClick(doSlurp);
+      slurpBtn = btn;
+      return slurpBtn;
+    });
     contentEl.addEventListener("keypress", (k) => k.key === "Enter" && doSlurp());
   }
   onClose() {
@@ -9527,7 +9699,7 @@ var SlurpNewNoteModal = class extends import_obsidian3.Modal {
 
 // src/parse.ts
 var import_readability = __toESM(require_readability());
-var import_obsidian4 = require("obsidian");
+var import_obsidian6 = require("obsidian");
 var fixRelativeLinks = (html, articleUrl) => {
   const url = new URL(articleUrl);
   return html.replace(/(href|src)="\/([^\/].*?)"/g, `$1="${url.origin}/$2"`).replace(/(href|src)="([^\/].*?)"/g, (match, p1, p2) => {
@@ -9538,17 +9710,17 @@ var fixRelativeLinks = (html, articleUrl) => {
   });
 };
 var fetchHtml = async (url) => {
-  const html = await (0, import_obsidian4.requestUrl)(url).text;
+  const html = await (0, import_obsidian6.requestUrl)(url).text;
   if (!html) {
     logger().error(`Unable to fetch page from: ${url}.`);
-    throw `Unable to fetch page.`;
+    throw "Unable to fetch page.";
   }
   return fixRelativeLinks(html, url);
 };
 var parsePage = (doc) => {
   const article = new import_readability.Readability(doc).parse();
   if (!article || !article.title || !article.content) {
-    logger().error(`Parsed article missing critical content`, article);
+    logger().error("Parsed article missing critical content", article);
     throw "No title or content found.";
   }
   return article;
@@ -9562,24 +9734,28 @@ var parseMetadataTags = (elements, tagPrefix, tagCase) => {
 var parseMetadata = (doc, fmProps, tagPrefix, tagCase) => {
   const metadata = { tags: new Array(), slurpedTime: new Date() };
   const tmpl = 'meta[name="{s}"], meta[property="{s}"], meta[itemprop="{s}"], meta[http-equiv="{s}"]';
-  for (let i of fmProps) {
+  for (const i of fmProps) {
     const prop = i[1];
-    const metaFields = /* @__PURE__ */ new Set([...prop.metaFields || [], ...prop.extraMetaFields || []]);
-    metaFields.forEach((attr2) => {
-      const querySelector = formatString(tmpl, attr2);
+    const metaFields = /* @__PURE__ */ new Set([...prop.metaFields || []]);
+    logger().debug("attempting to parse prop metadata", prop);
+    for (const attr2 of metaFields) {
+      const querySelector = tmpl.replace("{s}", attr2);
       const elements = doc.querySelectorAll(querySelector);
-      if (elements.length == 0)
-        return;
-      if (prop.id == "tags") {
+      logger().debug("found prop elements", attr2, querySelector, elements);
+      if (elements.length === 0)
+        continue;
+      if (prop.id === "tags") {
         logger().debug("parsing tags", { prop, elements, tagPrefix, tagCase, metaFields, querySelector });
-        parseMetadataTags(elements, tagPrefix, tagCase).forEach((val) => metadata.tags.push(val));
+        for (const val of parseMetadataTags(elements, tagPrefix, tagCase)) {
+          metadata.tags.push(val);
+        }
       } else {
-        if (metadata[prop.id] != void 0)
-          return;
+        if (metadata[prop.id] !== void 0)
+          continue;
         logger().debug("adding metadata", { prop, elements, metaFields, querySelector });
         metadata[prop.id] = elements[0].content;
       }
-    });
+    }
   }
   ;
   return metadata;
@@ -9594,7 +9770,7 @@ var mergeMetadata = (article, metadata) => {
   return merged;
 };
 var parseMarkdown = (content) => {
-  const md = (0, import_obsidian4.htmlToMarkdown)((0, import_obsidian4.sanitizeHTMLToDom)(content));
+  const md = (0, import_obsidian6.htmlToMarkdown)((0, import_obsidian6.sanitizeHTMLToDom)(content));
   if (!md) {
     logger().error(`Parsed content resulted in falsey markdown: ${md}`);
     throw "Unable to convert content to Markdown.";
@@ -9603,7 +9779,200 @@ var parseMarkdown = (content) => {
 };
 
 // src/settings.ts
-var import_obsidian5 = require("obsidian");
+var import_obsidian9 = require("obsidian");
+
+// node_modules/obsidian-file-suggestion-component/dist/index.js
+var import_obsidian8 = require("obsidian");
+
+// node_modules/tslib/tslib.es6.js
+function __awaiter(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+}
+
+// node_modules/obsidian-file-suggestion-component/dist/file-input-suggest.js
+var import_obsidian7 = require("obsidian");
+
+// node_modules/obsidian-file-suggestion-component/dist/damerau-levenshtein.js
+var damerauLevenshtein = (strA, strB) => {
+  const a = [null, ...Array.from(strA.toLowerCase())];
+  const b = [null, ...Array.from(strB.toLowerCase())];
+  const d = new Array(a.length).fill(null).map(() => Array(b.length).fill(Number.POSITIVE_INFINITY));
+  for (let i = 0; i < a.length; i++) {
+    d[i][0] = i;
+  }
+  for (let i = 0; i < b.length; i++) {
+    d[0][i] = i;
+  }
+  for (let i = 1; i < a.length; i++) {
+    for (let j = 1; j < b.length; j++) {
+      const subCost = a[i] === b[j] ? 0 : 1;
+      d[i][j] = Math.min(
+        // deletion: 1 for the delete itself, plus the distance from one row back, since the prefix from `a` 
+        // up to the deleted character hasn't changed.
+        d[i - 1][j] + 1,
+        // insertion: 1 for the insert itself, plus the distance from one col back, since we're adding a character 
+        // to `a` in order to remain a compatible prefix of `b`.
+        d[i][j - 1] + 1,
+        // substitution: the distance from one diagonal move back, since it transforms both the prefix of `a` 
+        // and the prefix of `b`. the operation cost can be 0 in this case though if both `a` and `b` have the 
+        // same character in the same position.
+        d[i - 1][j - 1] + subCost
+      );
+      if (i > 1 && j > 1 && a[i - 1] === b[j] && a[i] === b[j - 1])
+        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+  }
+  return d[a.length - 1][b.length - 1];
+};
+
+// node_modules/obsidian-file-suggestion-component/dist/file-input-suggest.js
+var FileInputSuggest = class extends import_obsidian7.AbstractInputSuggest {
+  constructor() {
+    super(...arguments);
+    this.callback = () => {
+    };
+    this.filter = "both";
+  }
+  /**
+   * Creates a new instance of the FileInputSuggest class.
+   * @param app - The application instance. Required to list files/folders in the Vault.
+   * @param textInputEl - An input or editable div.
+   */
+  // constructor(app: App, textInputEl: HTMLDivElement | HTMLInputElement) {
+  //     super(app, textInputEl);
+  //     // this.app = app;
+  // }
+  /**
+   * Calculates the similarity score between a query and a path.
+   * The score is based on the Damerau-Levenshtein distance between the query and path,
+   * with a multiplier that favors partial substring matches and prefix matches.
+   *
+   * @param query - The query string.
+   * @param path - The path string.
+   * @returns The similarity score between the query and path.
+   */
+  static similarityScore(query, path) {
+    const q = query.toLowerCase();
+    const p = path.toLowerCase();
+    return damerauLevenshtein(q, p) * (p.includes(q) ? 0.2 : 1) * (p.startsWith(q) ? 0.1 : 1);
+  }
+  /**
+   * Recurses through the entire directory tree to get the complete list of folders.
+   * @param folder - The folder to start the recursion from. If not provided, the root folder of the app's vault is used.
+   * @returns A flat array of folder objects.
+   */
+  getFolders(folder) {
+    const f = folder || this.app.vault.getRoot();
+    const filteredChildren = f.children.filter((val) => val instanceof import_obsidian7.TFolder);
+    const childFolders = filteredChildren.map((folder2) => this.getFolders(folder2));
+    const flatChildFolders = childFolders.flat();
+    return [f, ...flatChildFolders];
+  }
+  /**
+   * Retrieves the suggestions for the given query.
+   * @param query - The query string.
+   * @returns An array of file or folder objects which match the query.
+   */
+  getSuggestions(query) {
+    const files = [
+      ...this.filter !== "file" ? this.getFolders() : [],
+      ...this.filter !== "folder" ? this.app.vault.getFiles() : []
+    ];
+    files.sort((a, b) => FileInputSuggest.similarityScore(query, a.name) - FileInputSuggest.similarityScore(query, b.name));
+    return files;
+  }
+  /**
+   * Adds the suggestion for the given file to the popover.
+   * @param file - The file or folder to render.
+   * @param el - The HTML element to render the suggestion in.
+   */
+  renderSuggestion(file, el) {
+    el.appendText(file.path);
+  }
+  /**
+   * Fired when the user selects a given suggestion and performs the necessary actions.
+   * @param file - The file or folder that was selected.
+   * @param evt - The event that triggered the selection.
+   */
+  selectSuggestion(file, evt) {
+    return __awaiter(this, void 0, void 0, function* () {
+      this.setValue(file.path);
+      this.callback(file, evt);
+      this.close();
+    });
+  }
+};
+
+// node_modules/obsidian-file-suggestion-component/dist/index.js
+var FileSuggestionComponent = class extends import_obsidian8.TextComponent {
+  /**
+   * Creates an <input> which will offer a popover list of suggested files and/or folders.
+   * @constructor
+   * @param {HTMLElement} containerEl - The container element to append the FileSuggester to.
+   * @param {App} app - The App instance. Required to list files/folders in the Vault.
+   */
+  constructor(containerEl, app) {
+    super(containerEl);
+    containerEl.appendChild(this.inputEl);
+    this.fileInputSuggest = new FileInputSuggest(app, this.inputEl);
+  }
+  /**
+   * Sets the callback function to be executed when a file is selected.
+   *
+   * @param cb - The callback function to be executed. It takes two parameters: the selected file and the event that triggered the selection.
+   * @returns The current instance of the `FileSuggester` class.
+   */
+  // biome-ignore lint/suspicious/noExplicitAny: obsidian demands it
+  onSelect(cb) {
+    this.fileInputSuggest.onSelect(cb);
+    this.fileInputSuggest.callback = cb;
+    return this;
+  }
+  /**
+   * Sets the component up to suggest files, folders, or both.
+   *
+   * @param filter - The filter to apply. Can be "file", "folder", or "both". Defaults to "both".
+   * @returns The current instance of the file suggester.
+   */
+  setFilter(filter = "both") {
+    this.fileInputSuggest.filter = filter;
+    return this;
+  }
+  /**
+   * Sets the limit for the number of files and/or folders suggested.
+   *
+   * @param limit - The maximum number of files and/or folders to suggest. Defaults to 100.
+   * @returns The current instance of the `FileSuggester` class.
+   */
+  setLimit(limit = 100) {
+    this.fileInputSuggest.limit = limit;
+    return this;
+  }
+};
 
 // node_modules/svelte/src/runtime/internal/utils.js
 function noop() {
@@ -10782,9 +11151,9 @@ function crossfade({ fallback, ...defaults }) {
   return [transition(to_send, to_receive, false), transition(to_receive, to_send, true)];
 }
 
-// src/components/NotePropSettings.svelte
+// src/components/frontmatter-prop-settings.svelte
 function add_css(target) {
-  append_styles(target, "svelte-lq22ng", '.mod-prop.svelte-lq22ng.svelte-lq22ng.svelte-lq22ng{display:flex;align-self:center;margin:0.8em 0;flex-direction:column;padding:0.25em 0;background-color:transparent;overflow:hidden;border:none}.mod-prop.svelte-lq22ng>.svelte-lq22ng.svelte-lq22ng,.mod-prop.svelte-lq22ng .top-section.svelte-lq22ng>.svelte-lq22ng{align-self:center}.mod-prop.svelte-lq22ng .input-section.svelte-lq22ng>.svelte-lq22ng,.mod-prop.svelte-lq22ng .top-section.svelte-lq22ng>.svelte-lq22ng{border:none}.mod-prop.svelte-lq22ng .top-section.svelte-lq22ng.svelte-lq22ng{display:flex;justify-content:space-between;width:100%}.mod-prop.svelte-lq22ng .top-section.svelte-lq22ng>.setting-item-info.svelte-lq22ng{width:80%}.mod-prop.svelte-lq22ng .input-section.svelte-lq22ng.svelte-lq22ng{display:flex;flex-direction:column;width:100%;overflow:hidden;max-height:0;transition:max-height 0.15s ease,\n			margin 0.3s ease}.mod-prop.svelte-lq22ng .input-section.visible.svelte-lq22ng.svelte-lq22ng{margin:1.6em 0;max-height:1350px}.mod-prop.svelte-lq22ng .shift.svelte-lq22ng.svelte-lq22ng{color:var(--text-accent-normal);font-size:medium;width:6%}.mod-prop.svelte-lq22ng .shift.svelte-lq22ng.svelte-lq22ng:hover{color:var(--text-accent-hover)}.mod-prop.svelte-lq22ng .up.svelte-lq22ng.svelte-lq22ng{margin:0 0 0 0.6em;border-radius:var(--button-radius) 0 0 var(--button-radius)}.mod-prop.svelte-lq22ng .up.svelte-lq22ng.svelte-lq22ng::after{content:"\u2191"}.mod-prop.svelte-lq22ng .down.svelte-lq22ng.svelte-lq22ng{margin:0 0.6em 0 0;border-radius:0 var(--button-radius) var(--button-radius) 0}.mod-prop.svelte-lq22ng .down.svelte-lq22ng.svelte-lq22ng::after{content:"\u2193"}.mod-prop.svelte-lq22ng .only.svelte-lq22ng.svelte-lq22ng{width:12%;margin:0 0.6em;border-radius:var(--button-radius)}.mod-prop.svelte-lq22ng .edit.svelte-lq22ng.svelte-lq22ng{width:65px}.mod-prop.svelte-lq22ng .disabled.svelte-lq22ng.svelte-lq22ng,.mod-prop.svelte-lq22ng input.svelte-lq22ng.svelte-lq22ng:disabled{color:var(--text-muted);opacity:50%}.mod-prop.svelte-lq22ng .validation-error.svelte-lq22ng.svelte-lq22ng,.mod-prop.svelte-lq22ng .validation-error.svelte-lq22ng.svelte-lq22ng{color:var(--text-error)}.mod-prop.svelte-lq22ng div.validation-error.svelte-lq22ng.svelte-lq22ng{font-size:small;text-align:center;margin:0.75em 0}.mod-prop.svelte-lq22ng div.validation-error.hidden.svelte-lq22ng.svelte-lq22ng{color:transparent;background-color:transparent}#new-property.svelte-lq22ng.svelte-lq22ng.svelte-lq22ng{display:flex;justify-content:center;align-items:center;margin:1.5em auto;width:20%;padding:0.4em;border-radius:var(--button-radius);border-width:var(--border-width) solid transparent;transition:color 0.2s,\n			border-color 0.2s,\n			background-color 0.2s}#new-property.svelte-lq22ng.svelte-lq22ng.svelte-lq22ng:hover{color:var(--text-accent-hover);background-color:var(--background-modifier-hover);border-color:var(--background-modifier-border-hover)}');
+  append_styles(target, "svelte-rhe08k", '.mod-prop.svelte-rhe08k.svelte-rhe08k.svelte-rhe08k{display:flex;align-self:center;margin:0.8em 0;flex-direction:column;padding:0.25em 0;background-color:transparent;overflow:hidden;border:none}.mod-prop.svelte-rhe08k>.svelte-rhe08k.svelte-rhe08k,.mod-prop.svelte-rhe08k .top-section.svelte-rhe08k>.svelte-rhe08k{align-self:center}.mod-prop.svelte-rhe08k .input-section.svelte-rhe08k>.svelte-rhe08k,.mod-prop.svelte-rhe08k .top-section.svelte-rhe08k>.svelte-rhe08k{border:none}.mod-prop.svelte-rhe08k .top-section.svelte-rhe08k.svelte-rhe08k{display:flex;justify-content:space-between;width:100%}.mod-prop.svelte-rhe08k .top-section.svelte-rhe08k>.setting-item-info.svelte-rhe08k{width:80%}.mod-prop.svelte-rhe08k .input-section.svelte-rhe08k.svelte-rhe08k{display:flex;flex-direction:column;width:100%;overflow:hidden;max-height:0;transition:max-height 0.15s ease,\n			margin 0.3s ease}.mod-prop.svelte-rhe08k .input-section.visible.svelte-rhe08k.svelte-rhe08k{margin:1.6em 0;max-height:1350px}.mod-prop.svelte-rhe08k .shift.svelte-rhe08k.svelte-rhe08k{color:var(--text-accent-normal);font-size:medium;width:6%}.mod-prop.svelte-rhe08k .shift.svelte-rhe08k.svelte-rhe08k:hover{color:var(--text-accent-hover)}.mod-prop.svelte-rhe08k .up.svelte-rhe08k.svelte-rhe08k{margin:0 0 0 0.6em;border-radius:var(--button-radius) 0 0 var(--button-radius)}.mod-prop.svelte-rhe08k .up.svelte-rhe08k.svelte-rhe08k::after{content:"\u2191"}.mod-prop.svelte-rhe08k .down.svelte-rhe08k.svelte-rhe08k{margin:0 0.6em 0 0;border-radius:0 var(--button-radius) var(--button-radius) 0}.mod-prop.svelte-rhe08k .down.svelte-rhe08k.svelte-rhe08k::after{content:"\u2193"}.mod-prop.svelte-rhe08k .only.svelte-rhe08k.svelte-rhe08k{width:12%;margin:0 0.6em;border-radius:var(--button-radius)}.mod-prop.svelte-rhe08k .edit.svelte-rhe08k.svelte-rhe08k{width:65px}.mod-prop.svelte-rhe08k .disabled.svelte-rhe08k.svelte-rhe08k,.mod-prop.svelte-rhe08k input.svelte-rhe08k.svelte-rhe08k:disabled{color:var(--text-muted);opacity:50%}.mod-prop.svelte-rhe08k div.validation-error.svelte-rhe08k.svelte-rhe08k{text-align:center;margin:0.75em 0}#new-property.svelte-rhe08k.svelte-rhe08k.svelte-rhe08k{display:flex;justify-content:center;align-items:center;margin:1.5em auto;width:20%;padding:0.4em;border-radius:var(--button-radius);border-width:var(--border-width) solid transparent;transition:color 0.2s,\n			border-color 0.2s,\n			background-color 0.2s}#new-property.svelte-rhe08k.svelte-rhe08k.svelte-rhe08k:hover{color:var(--text-accent-hover);background-color:var(--background-modifier-hover);border-color:var(--background-modifier-border-hover)}');
 }
 function get_each_context(ctx, list, i) {
   const child_ctx = ctx.slice();
@@ -10812,7 +11181,7 @@ function create_if_block_2(ctx) {
       button = element("button");
       attr(button, "class", button_class_value = "shift up " + /*idx*/
       (ctx[25] == /*props*/
-      ctx[0].length - 1 ? "only" : "") + " svelte-lq22ng");
+      ctx[0].length - 1 ? "only" : "") + " svelte-rhe08k");
     },
     m(target, anchor) {
       insert(target, button, anchor);
@@ -10826,7 +11195,7 @@ function create_if_block_2(ctx) {
       if (dirty & /*props*/
       1 && button_class_value !== (button_class_value = "shift up " + /*idx*/
       (ctx[25] == /*props*/
-      ctx[0].length - 1 ? "only" : "") + " svelte-lq22ng")) {
+      ctx[0].length - 1 ? "only" : "") + " svelte-rhe08k")) {
         attr(button, "class", button_class_value);
       }
     },
@@ -10857,7 +11226,7 @@ function create_if_block_1(ctx) {
     c() {
       button = element("button");
       attr(button, "class", button_class_value = "shift down " + /*idx*/
-      (ctx[25] == 0 ? "only" : "") + " svelte-lq22ng");
+      (ctx[25] == 0 ? "only" : "") + " svelte-rhe08k");
     },
     m(target, anchor) {
       insert(target, button, anchor);
@@ -10870,7 +11239,7 @@ function create_if_block_1(ctx) {
       ctx = new_ctx;
       if (dirty & /*props*/
       1 && button_class_value !== (button_class_value = "shift down " + /*idx*/
-      (ctx[25] == 0 ? "only" : "") + " svelte-lq22ng")) {
+      (ctx[25] == 0 ? "only" : "") + " svelte-rhe08k")) {
         attr(button, "class", button_class_value);
       }
     },
@@ -10938,15 +11307,15 @@ function create_if_block(ctx) {
       attr(input, "id", input_id_value = "prop-description-" + /*prop*/
       ctx[23].id);
       attr(input, "type", "text");
-      attr(input, "class", "prop-input svelte-lq22ng");
+      attr(input, "class", "prop-input svelte-rhe08k");
       input.disabled = input_disabled_value = /*prop*/
       ctx[23].enabled === false;
       attr(div3, "class", "setting-item-control");
-      attr(div4, "class", "setting-item svelte-lq22ng");
+      attr(div4, "class", "setting-item svelte-rhe08k");
       attr(div7, "class", "setting-item-info");
       attr(button, "class", "mod-warning");
       attr(div8, "class", "setting-item-control");
-      attr(div9, "class", "setting-item svelte-lq22ng");
+      attr(div9, "class", "setting-item svelte-rhe08k");
     },
     m(target, anchor) {
       insert(target, div4, anchor);
@@ -11231,18 +11600,18 @@ function create_each_block(key_1, ctx) {
       ctx[11](
         /*idx*/
         ctx[25]
-      ) + " svelte-lq22ng");
+      ) + " svelte-rhe08k");
       attr(div1, "class", div1_class_value = "setting-item-description " + /*getDisabledClass*/
       ctx[11](
         /*idx*/
         ctx[25]
-      ) + " svelte-lq22ng");
-      attr(div2, "class", "setting-item-info svelte-lq22ng");
+      ) + " svelte-rhe08k");
+      attr(div2, "class", "setting-item-info svelte-rhe08k");
       attr(button, "class", button_class_value = "edit " + /*inputsVisible*/
       (ctx[1][
         /*idx*/
         ctx[25]
-      ] ? "mod-cta" : "") + " svelte-lq22ng");
+      ] ? "mod-cta" : "") + " svelte-rhe08k");
       attr(button, "title", button_title_value = /*inputsVisible*/
       ctx[1][
         /*idx*/
@@ -11253,17 +11622,17 @@ function create_each_block(key_1, ctx) {
         /*idx*/
         ctx[25]
       ).length > 0;
-      attr(div3, "class", "top-section svelte-lq22ng");
-      attr(div4, "class", "validation-error svelte-lq22ng");
+      attr(div3, "class", "top-section svelte-rhe08k");
+      attr(div4, "class", "validation-error svelte-rhe08k");
       attr(div7, "class", "setting-item-info");
       attr(input0, "type", "checkbox");
       attr(input0, "id", input0_id_value = /*prop*/
       ctx[23].id);
-      attr(input0, "class", "svelte-lq22ng");
+      attr(input0, "class", "svelte-rhe08k");
       attr(div8, "class", div8_class_value = "checkbox-container " + /*prop*/
       (ctx[23].enabled ? "is-enabled" : ""));
       attr(div9, "class", "setting-item-control");
-      attr(div10, "class", "setting-item mod-toggle svelte-lq22ng");
+      attr(div10, "class", "setting-item mod-toggle svelte-rhe08k");
       attr(div11, "class", "setting-item-name");
       attr(div12, "class", "setting-item-description");
       attr(div13, "class", "setting-item-info");
@@ -11274,7 +11643,7 @@ function create_each_block(key_1, ctx) {
       (ctx[2][
         /*idx*/
         ctx[25]
-      ].key.length > 0 ? "validation-error" : "") + " svelte-lq22ng");
+      ].key.length > 0 ? "validation-error" : "") + " svelte-rhe08k");
       attr(input1, "title", input1_title_value = /*tooltips*/
       ctx[3][
         /*idx*/
@@ -11285,7 +11654,7 @@ function create_each_block(key_1, ctx) {
       input1.disabled = input1_disabled_value = /*prop*/
       ctx[23].enabled === false;
       attr(div14, "class", "setting-item-control");
-      attr(div15, "class", "setting-item svelte-lq22ng");
+      attr(div15, "class", "setting-item svelte-rhe08k");
       attr(div16, "class", "setting-item-name");
       attr(div17, "class", "setting-item-description");
       attr(div18, "class", "setting-item-info");
@@ -11296,13 +11665,13 @@ function create_each_block(key_1, ctx) {
       ctx[12](
         /*idx*/
         ctx[25]
-      ) + " svelte-lq22ng");
+      ) + " svelte-rhe08k");
       attr(input2, "placeholder", input2_placeholder_value = /*prop*/
       ctx[23].defaultFormat || "Add format");
       input2.disabled = input2_disabled_value = /*prop*/
       ctx[23].enabled === false;
       attr(div19, "class", "setting-item-control");
-      attr(div20, "class", "setting-item svelte-lq22ng");
+      attr(div20, "class", "setting-item svelte-rhe08k");
       attr(div21, "id", div21_id_value = `input-section-${/*idx*/
       ctx[25]}`);
       attr(div21, "class", div21_class_value = "input-section " + /*inputsVisible*/
@@ -11313,8 +11682,8 @@ function create_each_block(key_1, ctx) {
       ctx[13](
         /*idx*/
         ctx[25]
-      ).length > 0 ? "visible" : "") + " svelte-lq22ng");
-      attr(div22, "class", "setting-item mod-prop svelte-lq22ng");
+      ).length > 0 ? "visible" : "") + " svelte-rhe08k");
+      attr(div22, "class", "setting-item mod-prop svelte-rhe08k");
       attr(div22, "data-id", div22_data_id_value = /*prop*/
       ctx[23].id);
       this.first = div22;
@@ -11439,7 +11808,7 @@ function create_each_block(key_1, ctx) {
       ctx[11](
         /*idx*/
         ctx[25]
-      ) + " svelte-lq22ng")) {
+      ) + " svelte-rhe08k")) {
         attr(div0, "class", div0_class_value);
       }
       if ((!current || dirty & /*props*/
@@ -11451,7 +11820,7 @@ function create_each_block(key_1, ctx) {
       ctx[11](
         /*idx*/
         ctx[25]
-      ) + " svelte-lq22ng")) {
+      ) + " svelte-rhe08k")) {
         attr(div1, "class", div1_class_value);
       }
       if ((!current || dirty & /*inputsVisible, props*/
@@ -11466,7 +11835,7 @@ function create_each_block(key_1, ctx) {
       (ctx[1][
         /*idx*/
         ctx[25]
-      ] ? "mod-cta" : "") + " svelte-lq22ng")) {
+      ] ? "mod-cta" : "") + " svelte-rhe08k")) {
         attr(button, "class", button_class_value);
       }
       if (!current || dirty & /*inputsVisible, props*/
@@ -11519,7 +11888,7 @@ function create_each_block(key_1, ctx) {
       (ctx[2][
         /*idx*/
         ctx[25]
-      ].key.length > 0 ? "validation-error" : "") + " svelte-lq22ng")) {
+      ].key.length > 0 ? "validation-error" : "") + " svelte-rhe08k")) {
         attr(input1, "class", input1_class_value);
       }
       if (!current || dirty & /*tooltips, props*/
@@ -11559,7 +11928,7 @@ function create_each_block(key_1, ctx) {
       ctx[12](
         /*idx*/
         ctx[25]
-      ) + " svelte-lq22ng")) {
+      ) + " svelte-rhe08k")) {
         attr(input2, "class", input2_class_value);
       }
       if (!current || dirty & /*props*/
@@ -11610,7 +11979,7 @@ function create_each_block(key_1, ctx) {
       ctx[13](
         /*idx*/
         ctx[25]
-      ).length > 0 ? "visible" : "") + " svelte-lq22ng")) {
+      ).length > 0 ? "visible" : "") + " svelte-rhe08k")) {
         attr(div21, "class", div21_class_value);
       }
       if (!current || dirty & /*props*/
@@ -11728,7 +12097,7 @@ function create_fragment(ctx) {
       attr(div3, "class", "setting-item");
       attr(div4, "id", "new-property");
       attr(div4, "title", "New Property");
-      attr(div4, "class", "svelte-lq22ng");
+      attr(div4, "class", "svelte-rhe08k");
     },
     m(target, anchor) {
       insert(target, div3, anchor);
@@ -11930,15 +12299,15 @@ function instance($$self, $$props, $$invalidate) {
     click_handler_4
   ];
 }
-var NotePropSettings = class extends SvelteComponent {
+var Frontmatter_prop_settings = class extends SvelteComponent {
   constructor(options) {
     super();
     init(this, options, instance, create_fragment, safe_not_equal, { props: 0, onValidate: 14 }, add_css);
   }
 };
-var NotePropSettings_default = NotePropSettings;
+var frontmatter_prop_settings_default = Frontmatter_prop_settings;
 
-// src/string-case.ts
+// src/lib/string-case.ts
 var STRING_CASES = ["camelCase", "PascalCase", "snake_case", "kebab-case", "iKebab-case"];
 var StringCaseOptions = STRING_CASES.reduce((acc, cur) => {
   acc[cur] = cur;
@@ -11946,7 +12315,7 @@ var StringCaseOptions = STRING_CASES.reduce((acc, cur) => {
 }, {});
 
 // src/settings.ts
-var SlurpSettingsTab = class extends import_obsidian5.PluginSettingTab {
+var SlurpSettingsTab = class extends import_obsidian9.PluginSettingTab {
   constructor(app, plugin) {
     super(app, plugin);
     this.plugin = plugin;
@@ -11955,68 +12324,101 @@ var SlurpSettingsTab = class extends import_obsidian5.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    new import_obsidian5.Setting(containerEl).setName("Properties").setHeading();
-    new import_obsidian5.Setting(containerEl).setName("Show empty properties").setDesc("Should Slurp add all note properties even if they are empty?").addToggle(
+    new import_obsidian9.Setting(containerEl).setName("General").setHeading();
+    const saveLoc = new import_obsidian9.Setting(containerEl).setName("Default save location").setDesc("What directory should Slurp save pages to? Leave blank to save to the vault's main directory.");
+    new FileSuggestionComponent(saveLoc.controlEl, this.app).setValue(this.plugin.settings.defaultPath).setPlaceholder(DEFAULT_SETTINGS.defaultPath).setFilter("folder").setLimit(10).onSelect(async (val) => {
+      this.plugin.settings.defaultPath = val.path;
+      await this.plugin.saveSettings();
+    });
+    new import_obsidian9.Setting(containerEl).setName("Properties").setHeading();
+    new import_obsidian9.Setting(containerEl).setName("Show empty properties").setDesc("Should Slurp add all note properties even if they are empty?").addToggle(
       (toggle) => toggle.setValue(this.plugin.settings.fm.includeEmpty).onChange(async (val) => {
         this.plugin.settings.fm.includeEmpty = val;
         await this.plugin.saveSettings();
       })
     );
+    const hashProps = (p) => {
+      const sorted = sortFrontMatterItems(p);
+      return murmurhash3_32(
+        sorted.map((val) => JSON.stringify(val.getSetting())).join("")
+      );
+    };
+    const origPropsHash = hashProps(Array.from(this.plugin.fmProps.values()));
     const onValidate = (props) => {
-      this.logger.debug("onValidate called", props);
-      const modKeys = props.map((prop) => {
-        this.plugin.fmProps.set(prop.id, prop);
-        return prop.id;
-      });
-      Object.keys(this.plugin.fmProps).map((id) => modKeys.contains(id) ? null : id).filter((id) => id !== null).map((id) => {
-        if (id) {
-          delete this.plugin.settings.fm.properties[id];
-          this.plugin.fmProps.delete(id);
-        }
-      });
+      const hash2 = hashProps(props);
+      if (origPropsHash == hash2) {
+        this.logger.debug("onValidate called, no changes detected", { hash: hash2 });
+        return;
+      }
+      this.logger.debug("onValidate called, changes detected", { hash: hash2, originalHash: origPropsHash, props });
+      const newPropIds = props.map((prop) => prop.id);
+      const deleted = Array.from(this.plugin.fmProps.keys()).filter((id) => !newPropIds.contains(id));
+      if (deleted.length > 0) {
+        logger().warn("removing note properties", deleted);
+        deleted.forEach((id) => this.plugin.fmProps.delete(id));
+      }
+      props.forEach((prop) => this.plugin.fmProps.set(prop.id, prop));
       this.plugin.saveSettings();
     };
-    new NotePropSettings_default({
+    new frontmatter_prop_settings_default({
       target: this.containerEl,
       props: {
         props: Array.from(this.plugin.fmProps.values()),
         onValidate: (props) => onValidate(props)
       }
     });
-    new import_obsidian5.Setting(containerEl).setName("Tags").setHeading();
-    new import_obsidian5.Setting(containerEl).setName("Parse tags").setDesc("Use the tags and keywords discovered in slurped page metadata? WARNING: May result in a large number of new tags, prefixes are highly recommended. Some sites put entire sentences into the fields meant for comma-separated keywords. Yes, abc7news.com, I'm talking about you. ").addToggle(
+    new import_obsidian9.Setting(containerEl).setName("Tags").setHeading();
+    new import_obsidian9.Setting(containerEl).setName("Parse tags").setDesc("Use the tags and keywords discovered in slurped page metadata? WARNING: May result in a large number of new tags, prefixes are highly recommended. Some sites put entire sentences into the fields meant for comma-separated keywords. Yes, abc7news.com, I'm talking about you. ").addToggle(
       (toggle) => toggle.setValue(this.plugin.settings.fm.tags.parse).onChange(async (val) => {
         this.plugin.settings.fm.tags.parse = val;
         await this.plugin.saveSettings();
       })
     );
-    new import_obsidian5.Setting(containerEl).setName("Tag prefix").setDesc("Apply this prefix to all tags.").addText(
+    new import_obsidian9.Setting(containerEl).setName("Tag prefix").setDesc("Apply this prefix to all tags.").addText(
       (text2) => text2.setValue(this.plugin.settings.fm.tags.prefix).setDisabled(!this.plugin.settings.fm.tags.parse).onChange(async (val) => {
         this.plugin.settings.fm.tags.prefix = val;
         await this.plugin.saveSettings();
       })
     );
-    new import_obsidian5.Setting(containerEl).setName("Tag case").setDesc("Format multi-word tags using this style. iKebab-case will replace spaces with hyphens without changing case.").addDropdown(
+    new import_obsidian9.Setting(containerEl).setName("Tag case").setDesc("Format multi-word tags using this style. iKebab-case will replace spaces with hyphens without changing case.").addDropdown(
       (dropdown) => dropdown.addOptions(StringCaseOptions).setValue(this.plugin.settings.fm.tags.case).setDisabled(!this.plugin.settings.fm.tags.parse).onChange(async (val) => {
         this.plugin.settings.fm.tags.case = val;
         await this.plugin.saveSettings();
       })
     );
-    new import_obsidian5.Setting(containerEl).setName("Logs").setHeading();
-    new import_obsidian5.Setting(containerEl).setName("Debug mode").setDesc("Write debug messages to console and slurp.log.").addToggle(
+    new import_obsidian9.Setting(containerEl).setName("Report an Issue").setHeading().setDesc("Visit github.com/inhumantsar/slurp/issues/new to report a bug or request a feature.");
+    new import_obsidian9.Setting(containerEl).setName("Debug mode").setDesc("Write debug messages to console and slurp.log.").addToggle(
       (toggle) => toggle.setValue(this.plugin.settings.logs.debug).onChange(async (val) => {
         this.plugin.settings.logs.debug = val;
         await this.plugin.saveSettings();
       })
     );
+    let recentLogsText;
+    new import_obsidian9.Setting(containerEl).setName("Recent Logs").setDesc(
+      "Copy+Paste these when opening a new GitHub issue. Not available when debug mode is enabled. Attach the most recent log file to the GitHub issue instead."
+    ).setDisabled(this.plugin.settings.logs.debug);
+    if (!this.plugin.settings.logs.debug) {
+      const recentLogs = containerEl.createDiv();
+      const recentLogsStyles = {};
+      recentLogsStyles["font-size"] = "small";
+      recentLogs.setCssProps(recentLogsStyles);
+      recentLogsText = containerEl.createEl("textarea");
+      const logsTextAreaStyles = {};
+      logsTextAreaStyles.width = "100%";
+      logsTextAreaStyles.height = "20em";
+      recentLogsText.setCssProps(logsTextAreaStyles);
+      recentLogsText.setText(logger().dump(false, 25).content);
+      recentLogs.appendChild(recentLogsText);
+      containerEl.appendChild(recentLogs);
+    }
   }
 };
 
 // main.ts
-var SlurpPlugin = class extends import_obsidian6.Plugin {
+var SlurpPlugin = class extends import_obsidian10.Plugin {
   constructor() {
     super(...arguments);
-    this.displayError = (err) => new import_obsidian6.Notice(`Slurp Error! ${err.message}`);
+    this.displayError = (err) => new import_obsidian10.Notice(`Slurp Error! ${err.message}. If this is a bug, please report it from plugin settings.`, 0);
   }
   async onload() {
     await this.loadSettings();
@@ -12029,7 +12431,7 @@ var SlurpPlugin = class extends import_obsidian6.Plugin {
       }
     });
     this.registerObsidianProtocolHandler("slurp", async (e) => {
-      if (!e.url || e.url == "")
+      if (!e.url || e.url === "")
         console.error("URI is empty or undefined");
       try {
         this.slurp(e.url);
@@ -12040,18 +12442,15 @@ var SlurpPlugin = class extends import_obsidian6.Plugin {
   }
   onunload() {
   }
-  fixTagPrefix(tagPrefix) {
-    return tagPrefix.endsWith("/") ? tagPrefix.substring(0, tagPrefix.length - 1) : tagPrefix;
-  }
   migrateSettingsV0toV1(loadedSettings) {
     if (Object.keys(loadedSettings).contains("settingsVersion"))
       return loadedSettings;
-    if (Object.keys(loadedSettings).length == 0)
+    if (Object.keys(loadedSettings).length === 0)
       return DEFAULT_SETTINGS;
     const v0 = loadedSettings;
     const fmTags = {
       parse: v0.parseTags,
-      prefix: this.fixTagPrefix(v0.tagPrefix),
+      prefix: removeTrailingSlash(v0.tagPrefix),
       case: v0.tagCase
     };
     const fm = {
@@ -12066,6 +12465,10 @@ var SlurpPlugin = class extends import_obsidian6.Plugin {
     };
     return v1;
   }
+  patchInDefaults() {
+    if (this.settings.defaultPath === void 0)
+      this.settings.defaultPath = DEFAULT_SETTINGS.defaultPath;
+  }
   migrateObjToMap(obj) {
     if (!obj.hasOwnProperty("keys")) {
       if (Object.keys(obj).length === 0)
@@ -12079,6 +12482,7 @@ var SlurpPlugin = class extends import_obsidian6.Plugin {
   async loadSettings() {
     const preSettings = Object.assign({}, await this.loadData());
     this.settings = this.migrateSettings(preSettings);
+    this.patchInDefaults();
     this.logger = new Logger(this);
     this.logger.debug("post-migration settings", this.settings);
     this.fmProps = createFrontMatterProps(this.settings.fm.properties);
@@ -12086,30 +12490,36 @@ var SlurpPlugin = class extends import_obsidian6.Plugin {
     await this.saveSettings();
   }
   async saveSettings() {
-    this.settings.fm.tags.prefix = this.fixTagPrefix(this.settings.fm.tags.prefix);
+    this.settings.fm.tags.prefix = removeTrailingSlash(this.settings.fm.tags.prefix);
     this.settings.fm.properties = createFrontMatterPropSettings(this.fmProps);
     this.logger.debug("saving settings", this.settings);
     await this.saveData(this.settings);
   }
   async slurp(url) {
-    const doc = new DOMParser().parseFromString(await fetchHtml(url), "text/html");
-    const article = {
-      slurpedTime: new Date(),
-      tags: new Array(),
-      ...parsePage(doc)
-    };
-    this.logger.debug("parsed page", article);
-    const parsedMetadata = parseMetadata(doc, this.fmProps, this.settings.fm.tags.prefix, this.settings.fm.tags.case);
-    this.logger.debug("parsed metadata", parsedMetadata);
-    const mergedMetadata = mergeMetadata(article, parsedMetadata);
-    this.logger.debug("merged metadata", parsedMetadata);
-    const md = parseMarkdown(article.content);
-    this.logger.debug("converted page to markdown", md);
-    await this.slurpNewNoteCallback({
-      ...mergedMetadata,
-      content: md,
-      link: url
-    });
+    this.logger.debug("slurping", { url });
+    try {
+      const doc = new DOMParser().parseFromString(await fetchHtml(url), "text/html");
+      const article = {
+        slurpedTime: new Date(),
+        tags: new Array(),
+        ...parsePage(doc)
+      };
+      this.logger.debug("parsed page", article);
+      const parsedMetadata = parseMetadata(doc, this.fmProps, this.settings.fm.tags.prefix, this.settings.fm.tags.case);
+      this.logger.debug("parsed metadata", parsedMetadata);
+      const mergedMetadata = mergeMetadata(article, parsedMetadata);
+      this.logger.debug("merged metadata", parsedMetadata);
+      const md = parseMarkdown(article.content);
+      this.logger.debug("converted page to markdown", md);
+      await this.slurpNewNoteCallback({
+        ...mergedMetadata,
+        content: md,
+        link: url
+      });
+    } catch (err) {
+      this.logger.error("Unable to Slurp page", { url, err: err.message });
+      this.displayError(err);
+    }
   }
   async slurpNewNoteCallback(article) {
     var _a;
@@ -12121,9 +12531,9 @@ ${frontMatter}
 
 ${article.content}`;
     this.logger.debug("writing file...");
-    const filePath = await createFilePath(this.app.vault, article.title);
+    const filePath = await getNewFilePath(this.app.vault, article.title, this.settings.defaultPath);
     const newFile = await this.app.vault.create(filePath, content);
-    (_a = this.app.workspace.getActiveViewOfType(import_obsidian6.MarkdownView)) == null ? void 0 : _a.leaf.openFile(newFile);
+    (_a = this.app.workspace.getActiveViewOfType(import_obsidian10.MarkdownView)) == null ? void 0 : _a.leaf.openFile(newFile);
   }
 };
 /*! Bundled license information:

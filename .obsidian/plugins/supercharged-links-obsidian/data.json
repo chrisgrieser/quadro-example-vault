@@ -25,18 +25,6 @@
     {
       "type": "path",
       "name": "extraction-date",
-      "value": ".loom",
-      "matchCaseSensitive": false,
-      "match": "endswith",
-      "uid": "249c-4fc0",
-      "selectText": true,
-      "selectAppend": false,
-      "selectPrepend": false,
-      "selectBackground": false
-    },
-    {
-      "type": "path",
-      "name": "extraction-date",
       "value": "Codes/",
       "matchCaseSensitive": false,
       "match": "startswith",

@@ -110,5 +110,6 @@
   "logs": {
     "logPath": "_slurplogs",
     "debug": false
-  }
+  },
+  "defaultPath": "Slurped Pages"
 }
