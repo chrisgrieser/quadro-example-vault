@@ -11,7 +11,6 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	* [[#Example Codings]]
 	* [[#Example Extractions]]
 - [[#Using this vault for your own research]]
-* [[#Download Webpages]]
 
 ## Installing this Vault
 1. Make sure your Obsidian version is at least 1.5.8.
@@ -40,9 +39,9 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 	- In this example vault, the words "iOS" and "Android" are highlighted (as you can see here).
 - **Supercharged Links:** ==Visually distinguish links== to different sorts of files:
 	- Example link to a Code File (yellow): [[Compatibility]]
-	- Example link to a Extraction File (green): [[app store problem 1]]
+	- Example link to an Extraction File (green): [[app store problem 1]]
 	- Example link to a Data File (document emoji): [[Verge Article A]]
-	- The plugin also allows you to color different individual codes or extraction types differently. The types of linkes are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin, in their respective settings menu.
+	- The plugin also allows you to color different individual codes or extraction types differently. The types of links are defined via **Supercharged Links**, their appearance is configured with the **Style Settings** plugin, in their respective settings menu.
 - **Hover Editor:** Hold `cmd` (macOS) or `ctrl` (Windows) and hover the mouse over a link to open a popup of the linked file, which you can modify.
 - **Slurp**: Use `cmd+shift+s` (macOS) or `ctrl+shift+s` (Windows) to ==download webpages== as markdown files with metadata directly into this vault.
 - **File Recovery**: Configured to automatically create versioned ==backups of any file every 5 minutes==. Accessible via the **Command Palette**.
@@ -67,7 +66,7 @@ A few example codes can be found in the folder `Codes`.
  
 ### Example Extractions
  A few example extractions can be found in the folder `Extractions`.
-- Some extractions have been made on compatibility issues, and the results aggregated in a spreadsheet. To view that table,  use **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): and search/select "Projects: Show projects".
+- Some extractions have been made on compatibility issues, and the results aggregated in a spreadsheet. To view that table, use **Command Palette** (`cmd+p` on macOS, `ctrl+p` on Windows): and search/select "Projects: Show projects".
 - There is also an [[Example Search for Co-occurrent Extraction Dimensions]], extractions where two dimensions have a specific value.
 
 ## Using this vault for your own research
