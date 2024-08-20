@@ -27,9 +27,9 @@ update-quadro:
     new_version=$(grep "version" "manifest.json" | cut -d\" -f4)
     mv -vf main.js manifest.json styles.css "$quadro_path"
     git add "$quadro_path" && 
-          git commit --message="chore: update Quadro to ${new_version}"
-          git push --no-progress && 
-          echo "Quadro updated to ${new_version}"
+        git commit --message="chore: update Quadro to ${new_version}" &&
+        git push --no-progress && 
+        echo "Quadro updated to ${new_version}"
 
 update-plugins:
     #!/usr/bin/env zsh
