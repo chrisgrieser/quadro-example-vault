@@ -1,4 +1,5 @@
 .variable-safety-for-obsidian-css {
+	/* biome-ignore lint/nursery/useConsistentGridAreas: <explanation> */
 	--text-faint: "";
 }
 
@@ -66,10 +67,3 @@ anyway.
 body .internal-embed .markdown-embed-content {
 	padding: 0;
 }
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* QUADRO MODALS & BUTTONS */
-
-/* .quadro-property-list textarea { */
-	min-height: 5rem; min-width: 15rem;
-/* } */
