@@ -30,8 +30,3 @@ update-quadro:
         git commit --message="chore: update Quadro to ${new_version}" &&
         git push --no-progress && 
         echo "Quadro updated to ${new_version}"
-
-update-plugins:
-    #!/usr/bin/env zsh
-    vault_name=$(basename "$PWD")
-    open "obsidian://advanced-uri?vault=${vault_name}&updateplugins=true"

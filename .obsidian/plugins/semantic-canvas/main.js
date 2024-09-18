@@ -652,3 +652,5 @@ var SemanticCanvasSettingsTab = class extends import_obsidian.PluginSettingTab {
     }));
   }
 };
+
+/* nosourcemap */

@@ -269,3 +269,5 @@ var Ollama = class extends import_obsidian2.Plugin {
 
 // src/main.ts
 var main_default = Ollama;
+
+/* nosourcemap */

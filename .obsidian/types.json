@@ -10,6 +10,7 @@
     "extraction-date": "datetime",
     "extraction-source": "multitext",
     "download-date": "date",
-    "extraction date": "datetime"
+    "extraction date": "datetime",
+    "merge-date": "datetime"
   }
 }
