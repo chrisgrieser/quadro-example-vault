@@ -8,11 +8,11 @@ open-vault:
 # like SemVer, simple incrementing is enough.
 release:
     #!/usr/bin/env zsh
-    git fetch --tags # in case of a shallow clone with `--no-tags`.
+    git fetch --no-progress --tags # in case of a shallow clone with `--no-tags`.
     last_tag=$(git describe --tags --abbrev=0 | tr -d 'v')
     next_tag=$((last_tag + 1))
     git tag "v$next_tag"
-    git push origin --tags
+    git push origin --tags --no-progress
 
 #───────────────────────────────────────────────────────────────────────────────
 
