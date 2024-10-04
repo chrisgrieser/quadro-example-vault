@@ -4,8 +4,9 @@ open-vault:
     open "obsidian://open?vault=${vault_name}&file=README"
 
 # As this is only an example vault, we do not need to be concerned with stuff
-
 # like SemVer, simple incrementing is enough.
+#───────────────────────────────────────────────────────────────────────────────
+
 release:
     #!/usr/bin/env zsh
     git fetch --no-progress --tags # in case of a shallow clone with `--no-tags`.
