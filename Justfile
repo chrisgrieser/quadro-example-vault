@@ -3,9 +3,9 @@ open-vault:
     vault_name=$(basename "$PWD") 
     open "obsidian://open?vault=${vault_name}&file=README"
 
+#───────────────────────────────────────────────────────────────────────────────
 # As this is only an example vault, we do not need to be concerned with stuff
 # like SemVer, simple incrementing is enough.
-#───────────────────────────────────────────────────────────────────────────────
 
 release:
     #!/usr/bin/env zsh
