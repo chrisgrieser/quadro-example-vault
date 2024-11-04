@@ -29,39 +29,20 @@ __export(main_exports, {
 });
 module.exports = __toCommonJS(main_exports);
 var import_obsidian = require("obsidian");
-var Location = /* @__PURE__ */ ((Location2) => {
-  Location2[Location2["VaultFolder"] = 0] = "VaultFolder";
-  Location2[Location2["SameFolder"] = 1] = "SameFolder";
-  Location2[Location2["SpecifiedFolder"] = 2] = "SpecifiedFolder";
-  return Location2;
-})(Location || {});
-var DEFAULT_SETTINGS = {
-  newFileLocation: 0 /* VaultFolder */,
-  customFileLocation: "",
-  // The default strings for unlabeled edges
-  cardDefault: "cards",
-  fileDefault: "files",
-  urlDefault: "urls",
-  // The string for group containment
-  groupDefault: "groups",
-  // For disabling whole types of interactions
-  useCards: true,
-  useUrls: true,
-  useFiles: true,
-  useGroups: true
-};
+
+// FileNode.ts
 var FileNode = class {
   /**
    * A Node on the Canvas that represents a file in the vault
-   * @param file 
-   * @param data 
-   * @param settings 
-   * @returns 
+   * @param file
+   * @param data
+   * @param settings
+   * @returns
    */
   constructor(file, data, settings, appRef) {
     var _a;
     this.filePath = file.file;
-    this.propsToSet = {};
+    this.propsOnCanvas = {};
     this.app = appRef;
     if (file.inGroups === void 0)
       file.inGroups = [];
@@ -75,7 +56,7 @@ var FileNode = class {
       return false;
     });
     if ((relevantEdges == null ? void 0 : relevantEdges.length) === 0 && file.inGroups.length === 0) {
-      this.propsToSet = null;
+      this.propsOnCanvas = null;
       return;
     }
     let edges = relevantEdges == null ? void 0 : relevantEdges.map((edge) => {
@@ -116,33 +97,33 @@ var FileNode = class {
       return newEdge;
     }).filter((newEdge) => newEdge.propLbl !== void 0 && newEdge.propLbl !== "");
     if (file.inGroups.length > 0 && settings.useGroups) {
-      this.propsToSet[settings.groupDefault] = file.inGroups.map((group) => group.label);
+      this.propsOnCanvas[settings.groupDefault] = file.inGroups.map((group) => group.label);
     }
     if (settings.useCards) {
       edges.filter((edge) => edge.type === "card").forEach((edge) => {
-        if (!this.propsToSet.hasOwnProperty(edge.propLbl)) {
-          this.propsToSet[edge.propLbl] = [edge.propVal];
+        if (!this.propsOnCanvas.hasOwnProperty(edge.propLbl)) {
+          this.propsOnCanvas[edge.propLbl] = [edge.propVal];
           return;
         }
-        this.propsToSet[edge.propLbl].push(edge.propVal);
+        this.propsOnCanvas[edge.propLbl].push(edge.propVal);
       });
     }
     if (settings.useUrls) {
       edges.filter((edge) => edge.type === "url").forEach((edge) => {
-        if (!this.propsToSet.hasOwnProperty(edge.propLbl)) {
-          this.propsToSet[edge.propLbl] = [edge.propVal];
+        if (!this.propsOnCanvas.hasOwnProperty(edge.propLbl)) {
+          this.propsOnCanvas[edge.propLbl] = [edge.propVal];
           return;
         }
-        this.propsToSet[edge.propLbl].push(edge.propVal);
+        this.propsOnCanvas[edge.propLbl].push(edge.propVal);
       });
     }
     if (settings.useFiles) {
       edges.filter((edge) => edge.type === "file").forEach((edge) => {
-        if (!this.propsToSet.hasOwnProperty(edge.propLbl)) {
-          this.propsToSet[edge.propLbl] = [edge.propVal];
+        if (!this.propsOnCanvas.hasOwnProperty(edge.propLbl)) {
+          this.propsOnCanvas[edge.propLbl] = [edge.propVal];
           return;
         }
-        this.propsToSet[edge.propLbl].push(edge.propVal);
+        this.propsOnCanvas[edge.propLbl].push(edge.propVal);
       });
     }
     function convertToWikilink(otherSide, that) {
@@ -154,6 +135,30 @@ var FileNode = class {
     }
   }
 };
+
+// main.ts
+var Location = /* @__PURE__ */ ((Location2) => {
+  Location2[Location2["VaultFolder"] = 0] = "VaultFolder";
+  Location2[Location2["SameFolder"] = 1] = "SameFolder";
+  Location2[Location2["SpecifiedFolder"] = 2] = "SpecifiedFolder";
+  return Location2;
+})(Location || {});
+var DEFAULT_SETTINGS = {
+  newFileLocation: 0 /* VaultFolder */,
+  customFileLocation: "",
+  // The default strings for unlabeled edges
+  cardDefault: "cards",
+  fileDefault: "files",
+  urlDefault: "urls",
+  // The string for group containment
+  groupDefault: "groups",
+  // For disabling whole types of interactions
+  useCards: true,
+  useUrls: true,
+  useFiles: true,
+  useGroups: false,
+  excludeKeys: "alias,aliases,tags,cssClasses"
+};
 var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
   async onload() {
     await this.loadSettings();
@@ -161,14 +166,14 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
       id: "set-canvas-to-note-properties",
       name: "Overwrite note properties based on canvas",
       callback: () => {
-        this.pushCanvasToNoteProperties(true);
+        this.pushCanvasDataToNotes(true);
       }
     });
     this.addCommand({
       id: "append-canvas-to-note-properties",
       name: "Append note properties based on canvas",
       callback: () => {
-        this.pushCanvasToNoteProperties(false);
+        this.pushCanvasDataToNotes(false);
       }
     });
     this.addCommand({
@@ -180,25 +185,203 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
     });
     this.addSettingTab(new SemanticCanvasSettingsTab(this.app, this));
     this.registerEvent(
+      //@ts-expect-error - it works, despite TypeScript not seeing the 'canvas:' methods
+      this.app.workspace.on("canvas:edge-menu", (menu, edge) => {
+        if (edge.label === "" || edge.toLineEnd === null || edge.from.node.filePath === void 0)
+          return;
+        const isBidirectional = edge.fromLineEnd !== null && edge.to.node.filePath !== void 0;
+        menu.addSeparator();
+        menu.addItem((item) => {
+          item.setTitle(isBidirectional ? "Remove property from both notes" : "Remove property from source note").setIcon("list-minus").onClick(() => {
+            const file = this.app.vault.getFileByPath(edge.from.node.filePath);
+            if (file === null)
+              return;
+            this.app.fileManager.processFrontMatter(file, (frontmatter) => {
+              frontmatter[edge.label] = void 0;
+            });
+            if (isBidirectional) {
+              const otherFile = this.app.vault.getFileByPath(edge.to.node.filePath);
+              if (otherFile === null)
+                return;
+              this.app.fileManager.processFrontMatter(otherFile, (frontmatter) => {
+                frontmatter[edge.label] = void 0;
+              });
+            }
+            if (isBidirectional)
+              new import_obsidian.Notice(`Successfully removed prop in 2 files`);
+            if (!isBidirectional)
+              new import_obsidian.Notice(`Successfully removed prop in 1 file`);
+          });
+        });
+        menu.addItem((item) => {
+          item.setTitle(isBidirectional ? "Update property in both notes" : "Update property in source note").setIcon("list-restart").onClick(() => {
+            let toVal = edge.to.node.text;
+            if (toVal === void 0) {
+              const filenameAsWikiLink = "[[" + edge.to.node.filePath.split("/").pop().substring(0, edge.to.node.filePath.split("/").pop().length - 3) + "]]";
+              toVal = filenameAsWikiLink;
+            }
+            const file = this.app.vault.getFileByPath(edge.from.node.filePath);
+            if (file === null)
+              return;
+            this.app.fileManager.processFrontMatter(file, (frontmatter) => {
+              frontmatter[edge.label] = toVal;
+            });
+            if (isBidirectional) {
+              let otherToVal = edge.from.node.text;
+              if (otherToVal === void 0) {
+                const filenameAsWikiLink = "[[" + edge.from.node.filePath.split("/").pop().substring(0, edge.from.node.filePath.split("/").pop().length - 3) + "]]";
+                otherToVal = filenameAsWikiLink;
+              }
+              const otherFile = this.app.vault.getFileByPath(edge.to.node.filePath);
+              if (otherFile === null)
+                return;
+              this.app.fileManager.processFrontMatter(otherFile, (frontmatter) => {
+                frontmatter[edge.label] = otherToVal;
+              });
+            }
+            if (isBidirectional)
+              new import_obsidian.Notice(`Successfully set 2 props in 2 files`);
+            if (!isBidirectional)
+              new import_obsidian.Notice(`Successfully set 1 prop in 1 file`);
+          });
+        });
+      })
+    );
+    this.registerEvent(
+      //@ts-expect-error - it works, despite TypeScript not seeing the 'canvas:' methods
+      this.app.workspace.on("canvas:node-connection-drop-menu", (menu, edge, third) => {
+        if (edge.file === void 0)
+          return;
+        const noteProps = this.getNoteData(edge.file.path);
+        noteProps.forEach((prop) => {
+          menu.addItem((item) => {
+            const key = Object.keys(prop)[0];
+            item.setTitle("Property: " + key).setIcon("down-arrow").onClick(() => {
+              var _a;
+              const activeView = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
+              if (activeView === null) {
+                new import_obsidian.Notice("Aborted: Active view was null");
+                return;
+              }
+              if (((_a = activeView == null ? void 0 : activeView.file) == null ? void 0 : _a.extension) !== "canvas") {
+                new import_obsidian.Notice("Aborted: Active view is not a canvas");
+                return;
+              }
+              this.addNodeDataAtLocation(activeView, prop[key], key, third.to.node.x, third.to.node.y, third.from.node);
+            });
+          });
+        });
+      })
+    );
+    this.registerEvent(
+      //@ts-expect-error - it works, despite TypeScript not seeing the 'canvas:' methods
+      this.app.workspace.on("canvas:node-menu", (menu, node) => {
+        if (node.file === void 0)
+          return;
+        menu.addItem((item) => {
+          item.setTitle("Pull note properties to canvas").setIcon("file-down").onClick(() => {
+            const activeView = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
+            if (!isValidActiveView(activeView))
+              return;
+            this.pullNotePropertiesToCanvas(activeView, [node], false);
+          });
+        });
+        menu.addItem((item) => {
+          item.setTitle("Show existing connections").setIcon("git-compare-arrows").onClick(() => {
+            const activeView = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
+            if (!isValidActiveView(activeView))
+              return;
+            this.pullNotePropertiesToCanvas(activeView, [node], true);
+          });
+        });
+        menu.addItem((item) => {
+          item.setTitle("Append properties in note").setIcon("list-plus").onClick(() => {
+            const activeView = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
+            if (!isValidActiveView(activeView))
+              return;
+            this.pushCanvasDataToNotes(false, activeView.file, node.file.path);
+          });
+        });
+        menu.addItem((item) => {
+          item.setTitle("Overwrite properties in note").setIcon("list-restart").onClick(() => {
+            const activeView = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
+            if (!isValidActiveView(activeView))
+              return;
+            this.pushCanvasDataToNotes(true, activeView.file, node.file.path);
+          });
+        });
+        function isValidActiveView(activeView) {
+          var _a;
+          if (activeView === null) {
+            new import_obsidian.Notice("Aborted: Active view was null");
+            return false;
+          }
+          if (activeView.file === null) {
+            new import_obsidian.Notice("Aborted: Active view has no file property");
+            return false;
+          }
+          if (((_a = activeView == null ? void 0 : activeView.file) == null ? void 0 : _a.extension) !== "canvas") {
+            new import_obsidian.Notice("Aborted: Active view is not a canvas");
+            return false;
+          }
+          return true;
+        }
+      })
+    );
+    this.registerEvent(
       this.app.workspace.on("file-menu", (menu, file) => {
+        var _a;
+        const activeView = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
         if (file instanceof import_obsidian.TFolder || file === void 0)
           return;
-        if (file.extension === "md") {
+        if (file.extension === "md" && ((_a = activeView == null ? void 0 : activeView.file) == null ? void 0 : _a.extension) !== "canvas") {
           menu.addItem((item) => {
-            item.setTitle("Create canvas based on note").setIcon("up-and-down-arrows").onClick(() => {
+            item.setTitle("Create canvas based on note").setIcon("square-plus").onClick(() => {
               this.createCanvasFromNote(file);
             });
           });
         }
         if (file.extension === "canvas") {
           menu.addItem((item) => {
-            item.setTitle("Append note properties based on canvas").setIcon("up-and-down-arrows").onClick(() => {
-              this.pushCanvasToNoteProperties(false, file);
+            item.setTitle("Append note properties based on canvas").setIcon("list-plus").onClick(() => {
+              this.pushCanvasDataToNotes(false, file);
             });
           });
           menu.addItem((item) => {
-            item.setTitle("Overwrite note properties based on canvas").setIcon("up-and-down-arrows").onClick(() => {
-              this.pushCanvasToNoteProperties(true, file);
+            item.setTitle("Overwrite note properties based on canvas").setIcon("list-restart").onClick(() => {
+              this.pushCanvasDataToNotes(true, file);
+            });
+          });
+          menu.addItem((item) => {
+            item.setTitle("Pull in properies for all notes on this canvas").setIcon("file-down").onClick(() => {
+              var _a2;
+              const activeView2 = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
+              if (activeView2 === null) {
+                new import_obsidian.Notice("Aborted: Active view was null");
+                return;
+              }
+              if (((_a2 = activeView2 == null ? void 0 : activeView2.file) == null ? void 0 : _a2.extension) !== "canvas") {
+                new import_obsidian.Notice("Aborted: Active view is not a canvas");
+                return;
+              }
+              const nodes = JSON.parse(activeView2.data)["nodes"].filter((node) => node.type === "file");
+              this.pullNotePropertiesToCanvas(activeView2, nodes, false);
+            });
+          });
+          menu.addItem((item) => {
+            item.setTitle("Show all connections between notes on this canvas").setIcon("git-compare-arrows").onClick(() => {
+              var _a2;
+              const activeView2 = this.app.workspace.getActiveViewOfType(import_obsidian.TextFileView);
+              if (activeView2 === null) {
+                new import_obsidian.Notice("Aborted: Active view was null");
+                return;
+              }
+              if (((_a2 = activeView2 == null ? void 0 : activeView2.file) == null ? void 0 : _a2.extension) !== "canvas") {
+                new import_obsidian.Notice("Aborted: Active view is not a canvas");
+                return;
+              }
+              const nodes = JSON.parse(activeView2.data)["nodes"].filter((node) => node.type === "file");
+              this.pullNotePropertiesToCanvas(activeView2, nodes, true);
             });
           });
         }
@@ -209,7 +392,6 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
    * The main function for using a note to create a new canvas.
    */
   async createCanvasFromNote(file) {
-    var _a;
     if (file === void 0)
       file = this.app.workspace.getActiveFile();
     if (!file || (file == null ? void 0 : file.extension) !== "md") {
@@ -218,14 +400,7 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
     }
     const name = file.basename;
     new import_obsidian.Notice("Creating canvas for " + name);
-    const allProperties = (_a = this.app.metadataCache.getCache(file.path)) == null ? void 0 : _a.frontmatter;
-    let listTypeProps = [];
-    if (allProperties !== void 0) {
-      Object.keys(allProperties).forEach((key) => {
-        if (Array.isArray(allProperties[key]))
-          listTypeProps.push({ [key]: allProperties[key] });
-      });
-    }
+    let listTypeProps = this.getNoteData(file.path);
     const that = this;
     const canvasContents = buildCanvasContents(file, listTypeProps);
     const savePath = createSavePathBasedOnSettings(file, that);
@@ -258,7 +433,7 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
         if (!Array.isArray(valArr))
           throw new Error("A non-array was passed into buildCanvasContents");
         addEdge(key);
-        if (isGroup(valArr))
+        if (SemanticCanvasPlugin.isGroup(valArr))
           return addGroup(key, valArr);
         const val = valArr[0];
         return addNode(val, firstColumnPosition);
@@ -283,7 +458,7 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
           x: xPos.toString(),
           y: curY.toString()
         };
-        if (isFile(val)) {
+        if (SemanticCanvasPlugin.isFile(val)) {
           newNode.type = "file";
           newNode.file = val.substring(2, val.length - 2);
           newNode.width = 400;
@@ -299,7 +474,7 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
             if (foundFile !== null)
               newNode.file = foundFile.path;
           }
-        } else if (isURL(val)) {
+        } else if (SemanticCanvasPlugin.isURL(val)) {
           newNode.type = "link";
           newNode.url = val;
           newNode.width = 400;
@@ -339,27 +514,6 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
         curY = curY + newGroup.height;
         canvasContents2.nodes.push(newGroup);
       }
-      function isGroup(val) {
-        return val.length > 1;
-      }
-      function isFile(val) {
-        if (val.substring(0, 2) !== "[[")
-          return false;
-        if (val.substring(val.length - 2) !== "]]")
-          return false;
-        if (val.split("[[").length !== 2)
-          return false;
-        return true;
-      }
-      function isURL(val) {
-        if (val.toUpperCase().substring(0, 4) !== "HTTP")
-          return false;
-        if (!val.contains("//"))
-          return false;
-        if (val.length < 8)
-          return false;
-        return true;
-      }
     }
     function createSavePathBasedOnSettings(file2, that2) {
       let location = "";
@@ -390,44 +544,52 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
    * The main function for using an existing canvas to update note properties.
    * @param overwrite `true` will overwrite existing values for keys
    */
-  async pushCanvasToNoteProperties(overwrite, file) {
+  async pushCanvasDataToNotes(overwrite, canvasFile, onlyUpdateNoteAtPath) {
     var _a;
-    if (file === void 0)
-      file = this.app.workspace.getActiveFile();
-    if (!file || (file == null ? void 0 : file.extension) !== "canvas") {
+    if (canvasFile === void 0)
+      canvasFile = this.app.workspace.getActiveFile();
+    if (!canvasFile || (canvasFile == null ? void 0 : canvasFile.extension) !== "canvas") {
       new import_obsidian.Notice("Aborted: Active file is not Canvas");
       return;
     }
-    let data = await SemanticCanvasPlugin.getCanvasMap(file);
+    let data = await SemanticCanvasPlugin.getCanvasMap(canvasFile);
     if (!data) {
       new import_obsidian.Notice("Aborted: No Canvas data found");
       return;
     }
-    let fileNodes = (_a = data == null ? void 0 : data.files) == null ? void 0 : _a.map((file2) => new FileNode(file2, data, this.settings, this.app));
+    let fileNodes = (_a = data == null ? void 0 : data.files) == null ? void 0 : _a.map((file) => new FileNode(file, data, this.settings, this.app));
     let dedupedFileNodes = [];
     fileNodes == null ? void 0 : fileNodes.forEach((fileNode) => {
-      if (fileNode.propsToSet === null)
+      if (fileNode.propsOnCanvas === null)
         return;
       let existing = dedupedFileNodes == null ? void 0 : dedupedFileNodes.find((ogNodeList) => ogNodeList.filePath === fileNode.filePath);
       if (existing === void 0) {
         dedupedFileNodes.push(fileNode);
         return;
       }
-      existing.propsToSet = mergeProps(existing.propsToSet, fileNode.propsToSet);
+      existing.propsOnCanvas = mergeProps(existing.propsOnCanvas, fileNode.propsOnCanvas);
     });
-    dedupedFileNodes = dedupedFileNodes.filter((fileNode) => fileNode.propsToSet && Object.keys(fileNode.propsToSet).length > 0);
+    dedupedFileNodes = dedupedFileNodes.filter((fileNode) => fileNode.propsOnCanvas && Object.keys(fileNode.propsOnCanvas).length > 0);
     let actualFilesMap = dedupedFileNodes.map((fileNode) => {
+      const file = this.app.vault.getFileByPath(fileNode.filePath);
+      if (file === null)
+        throw new Error("No file found at path " + fileNode.filePath);
       return {
-        file: this.app.vault.getFileByPath(fileNode.filePath),
-        props: fileNode.propsToSet
+        file,
+        props: fileNode.propsOnCanvas
       };
     });
     actualFilesMap = actualFilesMap.filter((fileMap) => {
       var _a2;
       return ((_a2 = fileMap.file) == null ? void 0 : _a2.extension) === "md";
     });
+    if (onlyUpdateNoteAtPath !== void 0) {
+      actualFilesMap = actualFilesMap.filter((fileMap) => fileMap.file.path === onlyUpdateNoteAtPath);
+    }
     let propertyAddCount = 0;
     actualFilesMap.forEach((fileMap) => {
+      if (fileMap.props === null)
+        throw new Error("Cannot push canvas data to notes - fileMap.props was null");
       propertyAddCount = propertyAddCount + Object.keys(fileMap.props).length;
     });
     let modifiedFileCount = actualFilesMap.length;
@@ -458,6 +620,253 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
       });
       return a;
     }
+  }
+  /**
+   * Creates a new node in the file represented inside the passed-in File view & saves it
+   * @param text property value from the note
+   * @param label the key the value has in the note
+   * @param x where to put the new node
+   * @param y where to put the new node
+   */
+  async addNodeDataAtLocation(fileView, textArr, label, x, y, fromNode) {
+    if (fileView.file === null)
+      throw new Error("fileView had no associated file");
+    const visibleCanvasData = JSON.parse(fileView.data);
+    const that = this;
+    const newNodeOrGroup = makeNodeOrGroupOfNodesFor(textArr, label);
+    visibleCanvasData.nodes.push(...newNodeOrGroup);
+    const fromToSides = SemanticCanvasPlugin.determineSides(fromNode, newNodeOrGroup[0]);
+    visibleCanvasData.edges.push({
+      id: (Math.random() + 1).toString(36).substring(4),
+      fromNode: fromNode.id,
+      fromSide: fromToSides.from,
+      toNode: newNodeOrGroup[0].id,
+      toSide: fromToSides.to,
+      label
+    });
+    this.app.vault.process(fileView.file, () => JSON.stringify(visibleCanvasData));
+    function makeNodeOrGroupOfNodesFor(propVals, label2) {
+      const returnObj = [];
+      propVals.forEach((text) => {
+        let newNode = {
+          id: (Math.random() + 1).toString(36).substring(4),
+          x: x - 100,
+          y: y - 50 + 110 * returnObj.length,
+          width: 200,
+          height: 100
+        };
+        const isfile = SemanticCanvasPlugin.isFile(text);
+        newNode.type = isfile ? "file" : "text";
+        if (isfile) {
+          const linkSansBrackets = text.substring(2, text.length - 2);
+          const foundFile = that.app.metadataCache.getFirstLinkpathDest(linkSansBrackets, fileView.file.path);
+          if (foundFile !== null) {
+            newNode.file = foundFile.path;
+          }
+          if (foundFile === null) {
+            newNode.type = "text";
+            newNode.text = text;
+          }
+        }
+        if (!isfile)
+          newNode.text = text;
+        returnObj.push(newNode);
+      });
+      if (propVals.length > 1) {
+        let newNode = {
+          id: (Math.random() + 1).toString(36).substring(4),
+          x: x - 110,
+          y: y - 60,
+          width: 220,
+          height: 10 + 110 * returnObj.length,
+          type: "group",
+          label: label2
+        };
+        returnObj.unshift(newNode);
+      }
+      return returnObj;
+    }
+  }
+  /**
+   * The main function for using an existing canvas to update note properties.
+   * @param overwrite `true` will overwrite existing values for keys
+   */
+  async pullNotePropertiesToCanvas(fileView, nodesToPullFrom, existingOnly = false) {
+    if (fileView.file === null)
+      throw new Error("fileView had no associated file");
+    const visibleCanvasData = JSON.parse(fileView.data);
+    const canvasMap = await SemanticCanvasPlugin.getCanvasMap(fileView.file);
+    if (canvasMap === void 0)
+      throw new Error("Canvas Map was unable to be created");
+    let connectionTargets = SemanticCanvasPlugin.buildConnectionTargets(canvasMap);
+    let edgesToBuild = [];
+    let nodesToBuild = [];
+    nodesToPullFrom.forEach((node) => {
+      let noteProps = this.getNoteData(typeof node.file === "string" ? node.file : node.file.path);
+      noteProps.forEach((prop) => {
+        const key = Object.keys(prop)[0];
+        const vals = prop[key];
+        vals.forEach((val) => {
+          let connection = connectionTargets.find((target) => target.content === val || target.normalizedFileName && target.normalizedFileName === val);
+          if (connection === void 0) {
+            if (existingOnly)
+              return;
+            let newNode = {
+              id: (Math.random() + 1).toString(36).substring(4),
+              x: Number.parseFloat(node.x) + Number.parseFloat(node.width) + 20,
+              y: Number.parseFloat(node.y) + (Number.parseFloat(node.height) + 20) * nodesToBuild.length,
+              width: node.width,
+              height: node.height,
+              label: key
+            };
+            const isfile = SemanticCanvasPlugin.isFile(val);
+            newNode.type = isfile ? "file" : "text";
+            if (isfile) {
+              const linkSansBrackets = val.substring(2, val.length - 2);
+              const foundFile = this.app.metadataCache.getFirstLinkpathDest(linkSansBrackets, fileView.file.path);
+              if (foundFile !== null)
+                newNode.file = foundFile.path;
+              if (foundFile === null) {
+                newNode.type = "text";
+                newNode.text = val;
+              }
+            }
+            if (!isfile)
+              newNode.text = val;
+            nodesToBuild.push(newNode);
+            edgesToBuild.push({
+              id: (Math.random() + 1).toString(36).substring(4),
+              fromNode: node.id,
+              fromSide: "right",
+              toNode: newNode.id,
+              toSide: "left",
+              label: key
+            });
+            return;
+          }
+          if (edgeAlreadyExists(node.id, connection.id, key))
+            return;
+          const fromToSides = SemanticCanvasPlugin.determineSides(node, connection);
+          edgesToBuild.push({
+            id: (Math.random() + 1).toString(36).substring(4),
+            fromNode: node.id,
+            fromSide: fromToSides.from,
+            toNode: connection.id,
+            toSide: fromToSides.to,
+            label: key
+          });
+        });
+      });
+    });
+    visibleCanvasData.edges.push(...edgesToBuild);
+    visibleCanvasData.nodes.push(...nodesToBuild);
+    this.app.vault.process(fileView.file, () => JSON.stringify(visibleCanvasData));
+    return;
+    function edgeAlreadyExists(fromId, toId, labeled) {
+      return visibleCanvasData.edges.some((edge) => edge.fromNode === fromId && edge.toNode === toId && edge.label === labeled);
+    }
+  }
+  /**
+   * Gets the **list type** properties from the passed-in note file
+   * @param file the path of the .md file to get properties from
+   * @returns list-type properties map
+   */
+  getNoteData(filepath) {
+    var _a;
+    const allProperties = (_a = this.app.metadataCache.getCache(filepath)) == null ? void 0 : _a.frontmatter;
+    let listTypeProps = [];
+    const excludeKeys = this.settings.excludeKeys.split(",").map((key) => key.trim().toUpperCase());
+    if (allProperties !== void 0) {
+      Object.keys(allProperties).forEach((key) => {
+        if (excludeKeys.some((exclusion) => exclusion === key.toUpperCase()))
+          return;
+        if (Array.isArray(allProperties[key]))
+          listTypeProps.push({ [key]: allProperties[key] });
+      });
+    }
+    return listTypeProps;
+  }
+  //#region --- Static Helper Methods
+  /**
+   * Creates a list of pre-existing things on a canvas that a hypothetical node
+   * *could* link to if it's looking for links. 
+   * Content is returned a key:value pair where the key is the node id 
+   * and the value is a string-based representation of the content for comparison
+   * @param nodes 
+   */
+  static buildConnectionTargets(nodes) {
+    var _a, _b, _c;
+    let returnArray = [];
+    (_a = nodes.cards) == null ? void 0 : _a.forEach((card) => {
+      returnArray.push({
+        nodeType: "card",
+        id: card.id,
+        content: card.text,
+        x: card.x,
+        y: card.y,
+        w: card.width,
+        h: card.height
+      });
+    });
+    (_b = nodes.files) == null ? void 0 : _b.forEach((file) => {
+      const filename = file.file;
+      const filenameAsWikiLink = "[[" + file.file.split("/").pop().substring(0, file.file.split("/").pop().length - 3) + "]]";
+      returnArray.push({
+        nodeType: "file",
+        id: file.id,
+        content: filename,
+        normalizedFileName: filenameAsWikiLink,
+        x: file.x,
+        y: file.y,
+        w: file.width,
+        h: file.height
+      });
+    });
+    (_c = nodes.urls) == null ? void 0 : _c.forEach((url) => {
+      returnArray.push({
+        nodeType: "url",
+        id: url.id,
+        content: url.url,
+        x: url.x,
+        y: url.y,
+        w: url.width,
+        h: url.height
+      });
+    });
+    return returnArray;
+  }
+  static determineSides(fromNode, toNode) {
+    let verticalDelta = fromNode.y - toNode.y;
+    let horizontalDelta = fromNode.x - toNode.x;
+    if (Math.abs(verticalDelta) > Math.abs(horizontalDelta)) {
+      if (verticalDelta > 0)
+        return { from: "top", to: "bottom" };
+      return { from: "bottom", to: "top" };
+    }
+    if (horizontalDelta > 0)
+      return { from: "left", to: "right" };
+    return { from: "right", to: "left" };
+  }
+  static isGroup(val) {
+    return val.length > 1;
+  }
+  static isFile(val) {
+    if (val.substring(0, 2) !== "[[")
+      return false;
+    if (val.substring(val.length - 2) !== "]]")
+      return false;
+    if (val.split("[[").length !== 2)
+      return false;
+    return true;
+  }
+  static isURL(val) {
+    if (val.toUpperCase().substring(0, 4) !== "HTTP")
+      return false;
+    if (!val.contains("//"))
+      return false;
+    if (val.length < 8)
+      return false;
+    return true;
   }
   static async getCanvasData(file) {
     if (file === null || file.extension !== "canvas")
@@ -573,6 +982,7 @@ var SemanticCanvasPlugin = class extends import_obsidian.Plugin {
       });
     }
   }
+  //#endregion
   onunload() {
   }
   async loadSettings() {
@@ -614,6 +1024,12 @@ var SemanticCanvasSettingsTab = class extends import_obsidian.PluginSettingTab {
         });
       });
     }
+    new import_obsidian.Setting(containerEl).setName("Keys to ignore").setDesc(`A comma-separated list of property keys to ignore (case-insensitive).`).addTextArea((text) => {
+      text.setValue(this.plugin.settings.excludeKeys).onChange(async (value) => {
+        this.plugin.settings.excludeKeys = value;
+        await this.plugin.saveSettings();
+      });
+    });
     containerEl.createEl("h1", { text: "Canvas \u2192 set note properties" });
     containerEl.createEl("h2", { text: "Toggle property setting per type" });
     new import_obsidian.Setting(containerEl).setName("Set note properties for connections to cards ").setDesc("Default: true").addToggle((toggle) => toggle.setValue(this.plugin.settings.useCards).onChange(async (value) => {
@@ -628,7 +1044,7 @@ var SemanticCanvasSettingsTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.settings.useFiles = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian.Setting(containerEl).setName("Set note properties based on containment in groups").setDesc("Default: true").addToggle((toggle) => toggle.setValue(this.plugin.settings.useGroups).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Set note properties based on containment in groups").setDesc("Default: false").addToggle((toggle) => toggle.setValue(this.plugin.settings.useGroups).onChange(async (value) => {
       this.plugin.settings.useGroups = value;
       await this.plugin.saveSettings();
     }));
@@ -646,7 +1062,7 @@ var SemanticCanvasSettingsTab = class extends import_obsidian.PluginSettingTab {
       await this.plugin.saveSettings();
     }));
     containerEl.createEl("h2", { text: "Property keys for group containment" });
-    new import_obsidian.Setting(containerEl).setName("Property key for groups").setDesc("Default: groups").addText((text) => text.setPlaceholder("Default groups key...").setValue(this.plugin.settings.groupDefault).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Property key for unlabeled groups").setDesc("Default: groups").addText((text) => text.setPlaceholder("Default groups key...").setValue(this.plugin.settings.groupDefault).onChange(async (value) => {
       this.plugin.settings.groupDefault = value;
       await this.plugin.saveSettings();
     }));
