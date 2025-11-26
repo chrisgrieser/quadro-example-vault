@@ -1,7 +1,7 @@
 {
   "file-explorer": true,
   "global-search": true,
-  "switcher": true,
+  "switcher": false,
   "graph": true,
   "backlink": false,
   "outgoing-link": false,
@@ -26,5 +26,8 @@
   "sync": false,
   "canvas": true,
   "properties": true,
-  "bookmarks": false
+  "bookmarks": false,
+  "footnotes": false,
+  "bases": true,
+  "webviewer": false
 }

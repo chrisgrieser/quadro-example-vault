@@ -5,6 +5,11 @@ Please visit the [documentation for Quadro](https://github.com/chrisgrieser/obsi
 
 For help regarding Obsidian in general, refer to the [Obsidian Documentation](https://help.obsidian.md/Home). 
 
+
+> [!IMPORTANT] 
+> For demonstration purposes, this vault includes a lot of functionalities. In practice, you do not need to use all of those. Especially if you are new to Obsidian, the amount of features and plugins presented here is just to showcase what is possible.
+
+
 ## Table of Contents
 - [[#Installing this vault]]
 - [[#Pre-Configured Plugin Setup]]
@@ -35,13 +40,13 @@ For help regarding Obsidian in general, refer to the [Obsidian Documentation](ht
 	- Access via Command Palette or the "Box" Icon at the top left.
 - [File Recovery](https://help.obsidian.md/Plugins/File+recovery): Configured to automatically create versioned ==backups of any file every 5 minutes==. Accessible via the **Command Palette**.
 - [Graph View](https://help.obsidian.md/Plugins/Graph+view): Explore links between all files.
+- [Bases](https://help.obsidian.md/bases): Analyze extractions in a dynamic spreadsheet, similar to Notion or Excel. 
 
 > [!INFO]
 > For help regarding the core plugins, refer to the linked documentation. 
 
 ### Community Plugins
 - [Quadro](https://github.com/chrisgrieser/obsidian-quadro) itself: There are buttons to the far left for all Quadro commands. Briefly hover over them to see what each button does.
-- [Projects](https://github.com/marcusolsson/obsidian-projects): Analyze extractions in a dynamic spreadsheet, similar to Notion or Excel. (Despite it's name, its suitable for general data analysis and not just project management.)
 - [Another Quick Switcher](https://github.com/tadashi-aikawa/obsidian-another-quick-switcher)
 	- Search for Code Files only via `alt+c`.
 	- Search for Extraction Files only via `alt+e`.
@@ -70,7 +75,7 @@ A few data files for demonstration purposes, all stored in the folder `Data`
 - Two mock interviews with app developers for iOS and Android.
 	- [[Mock Interview A (iOS developer)]]
 	- [[Mock Interview B (Android developer)]]
-- A few articles downloaded with the [MarkDownload Browser Extension](https://chromewebstore.google.com/detail/markdownload-markdown-web/pcmpcfapbekmbjjkdalcgopdkipoggdi)
+- A few articles downloaded with the [Obsidian Web Clipper](https://help.obsidian.md/web-clipper)
 	- [[Verge Article A]]
 	- [[Verge Article B]]
 	- [[Verge Article C]]
